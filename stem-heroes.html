@@ -1,0 +1,1843 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>STEM Heroes: 100 African American Pioneers</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&display=swap');
+
+  :root {
+    --gold: #F5A623;
+    --deep-red: #C0392B;
+    --green: #27AE60;
+    --blue: #2980B9;
+    --purple: #8E44AD;
+    --teal: #16A085;
+    --orange: #E67E22;
+    --bg: #1A0A2E;
+    --card-bg: #ffffff;
+    --text-dark: #1a1a2e;
+    --text-light: #ffffff;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'Nunito', sans-serif;
+    background: var(--bg);
+    min-height: 100vh;
+    color: var(--text-light);
+    overflow-x: hidden;
+  }
+
+  /* ── STARS BACKGROUND ── */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background:
+      radial-gradient(ellipse at 20% 50%, rgba(120,40,200,0.15) 0%, transparent 60%),
+      radial-gradient(ellipse at 80% 20%, rgba(245,166,35,0.1) 0%, transparent 50%);
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  /* ── HEADER ── */
+  header {
+    position: relative;
+    z-index: 10;
+    text-align: center;
+    padding: 28px 20px 20px;
+    background: linear-gradient(135deg, #0d0721 0%, #1a0a2e 100%);
+    border-bottom: 3px solid var(--gold);
+  }
+
+  .header-badge {
+    display: inline-block;
+    background: var(--gold);
+    color: #1a0a2e;
+    font-weight: 900;
+    font-size: 0.75rem;
+    padding: 4px 14px;
+    border-radius: 20px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: 10px;
+  }
+
+  header h1 {
+    font-size: clamp(1.6rem, 5vw, 2.8rem);
+    font-weight: 900;
+    background: linear-gradient(90deg, #F5A623, #FF6B6B, #F5A623);
+    background-size: 200%;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    animation: shimmer 3s linear infinite;
+    line-height: 1.2;
+    margin-bottom: 6px;
+  }
+
+  @keyframes shimmer {
+    0% { background-position: 0% }
+    100% { background-position: 200% }
+  }
+
+  header p {
+    font-size: 0.95rem;
+    color: #bbb;
+    margin-bottom: 16px;
+  }
+
+  /* ── STATS BAR ── */
+  .stats-bar {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    flex-wrap: wrap;
+    padding: 10px 20px;
+  }
+
+  .stat {
+    background: rgba(255,255,255,0.07);
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 12px;
+    padding: 6px 16px;
+    font-size: 0.85rem;
+    color: var(--gold);
+    font-weight: 700;
+  }
+
+  /* ── MAIN LAYOUT ── */
+  main {
+    position: relative;
+    z-index: 10;
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 24px 16px 60px;
+  }
+
+  /* ── MODE TOGGLE ── */
+  .mode-toggle {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-bottom: 24px;
+  }
+
+  .mode-btn {
+    padding: 10px 28px;
+    border: 2px solid rgba(255,255,255,0.2);
+    border-radius: 30px;
+    background: transparent;
+    color: #ccc;
+    font-family: 'Nunito', sans-serif;
+    font-size: 1rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.25s;
+  }
+
+  .mode-btn.active {
+    background: var(--gold);
+    border-color: var(--gold);
+    color: #1a0a2e;
+    transform: scale(1.05);
+  }
+
+  .mode-btn:hover:not(.active) {
+    border-color: var(--gold);
+    color: var(--gold);
+  }
+
+  /* ── CATEGORY FILTERS ── */
+  .filters {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    justify-content: center;
+    margin-bottom: 28px;
+  }
+
+  .filter-btn {
+    padding: 6px 16px;
+    border-radius: 20px;
+    border: 2px solid transparent;
+    font-family: 'Nunito', sans-serif;
+    font-size: 0.85rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.2s;
+    opacity: 0.7;
+  }
+
+  .filter-btn.active { opacity: 1; transform: scale(1.05); }
+
+  .filter-btn[data-cat="All"]     { background: rgba(255,255,255,0.15); color: #fff; border-color: rgba(255,255,255,0.3); }
+  .filter-btn[data-cat="Science"] { background: rgba(39,174,96,0.25); color: #2ecc71; border-color: #27AE60; }
+  .filter-btn[data-cat="Tech"]    { background: rgba(41,128,185,0.25); color: #74b9ff; border-color: #2980B9; }
+  .filter-btn[data-cat="Engineering"] { background: rgba(230,126,34,0.25); color: #fdcb6e; border-color: #E67E22; }
+  .filter-btn[data-cat="Math"]    { background: rgba(142,68,173,0.25); color: #a29bfe; border-color: #8E44AD; }
+  .filter-btn[data-cat="Medicine"]{ background: rgba(192,57,43,0.25); color: #ff7675; border-color: #C0392B; }
+  .filter-btn[data-cat="Space"]   { background: rgba(22,160,133,0.25); color: #55efc4; border-color: #16A085; }
+
+  .filter-btn.active[data-cat="All"]     { background: rgba(255,255,255,0.9); color: #1a0a2e; }
+  .filter-btn.active[data-cat="Science"] { background: #27AE60; color: #fff; }
+  .filter-btn.active[data-cat="Tech"]    { background: #2980B9; color: #fff; }
+  .filter-btn.active[data-cat="Engineering"] { background: #E67E22; color: #fff; }
+  .filter-btn.active[data-cat="Math"]    { background: #8E44AD; color: #fff; }
+  .filter-btn.active[data-cat="Medicine"]{ background: #C0392B; color: #fff; }
+  .filter-btn.active[data-cat="Space"]   { background: #16A085; color: #fff; }
+
+  /* ── SEARCH ── */
+  .search-wrap {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 28px;
+  }
+
+  .search-wrap input {
+    width: 100%;
+    max-width: 420px;
+    padding: 12px 20px;
+    border-radius: 30px;
+    border: 2px solid rgba(255,255,255,0.15);
+    background: rgba(255,255,255,0.07);
+    color: #fff;
+    font-family: 'Nunito', sans-serif;
+    font-size: 1rem;
+    outline: none;
+    transition: border 0.2s;
+  }
+
+  .search-wrap input::placeholder { color: #888; }
+  .search-wrap input:focus { border-color: var(--gold); }
+
+  /* ── FLASHCARD SECTION ── */
+  #flashcard-section { display: block; }
+  #quiz-section { display: none; }
+
+  .card-counter {
+    text-align: center;
+    font-size: 0.9rem;
+    color: #aaa;
+    margin-bottom: 14px;
+    font-weight: 600;
+  }
+
+  /* ── FLIP CARD ── */
+  .flip-card-wrapper {
+    perspective: 1200px;
+    width: 100%;
+    max-width: 480px;
+    height: 320px;
+    margin: 0 auto 24px;
+    cursor: pointer;
+  }
+
+  .flip-card-inner {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    transform-style: preserve-3d;
+    transition: transform 0.55s cubic-bezier(0.4, 0.2, 0.2, 1);
+  }
+
+  .flip-card-wrapper.flipped .flip-card-inner {
+    transform: rotateY(180deg);
+  }
+
+  .flip-face {
+    position: absolute;
+    inset: 0;
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+    border-radius: 24px;
+    padding: 28px 28px 24px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.5);
+  }
+
+  .flip-front {
+    background: linear-gradient(135deg, #ffffff 0%, #f0f0f0 100%);
+    color: #1a1a2e;
+  }
+
+  .flip-back {
+    background: linear-gradient(135deg, #1a0a2e 0%, #2d1b69 100%);
+    border: 2px solid var(--gold);
+    color: #fff;
+    transform: rotateY(180deg);
+  }
+
+  .card-emoji {
+    font-size: 4rem;
+    margin-bottom: 8px;
+    line-height: 1;
+  }
+
+  /* ── HERO PHOTO ── */
+  .card-photo-wrap {
+    width: 110px;
+    height: 110px;
+    border-radius: 50%;
+    overflow: hidden;
+    margin: 0 auto 10px;
+    border: 4px solid var(--gold);
+    box-shadow: 0 4px 20px rgba(0,0,0,0.25);
+    background: #eee;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+
+  .card-photo-wrap img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: top center;
+  }
+
+  .card-photo-emoji {
+    font-size: 3.5rem;
+    line-height: 1;
+  }
+
+  .card-category-badge {
+    font-size: 0.7rem;
+    font-weight: 800;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    padding: 3px 12px;
+    border-radius: 12px;
+    margin-bottom: 10px;
+  }
+
+  .cat-Science    { background: rgba(39,174,96,0.2); color: #27AE60; }
+  .cat-Tech       { background: rgba(41,128,185,0.2); color: #2980B9; }
+  .cat-Engineering{ background: rgba(230,126,34,0.2); color: #E67E22; }
+  .cat-Math       { background: rgba(142,68,173,0.2); color: #8E44AD; }
+  .cat-Medicine   { background: rgba(192,57,43,0.2); color: #C0392B; }
+  .cat-Space      { background: rgba(22,160,133,0.2); color: #16A085; }
+
+  .card-name {
+    font-size: clamp(1.2rem, 4vw, 1.7rem);
+    font-weight: 900;
+    text-align: center;
+    line-height: 1.2;
+    margin-bottom: 4px;
+  }
+
+  .card-years {
+    font-size: 0.8rem;
+    color: #888;
+    margin-bottom: 6px;
+  }
+
+  .card-title {
+    font-size: 0.9rem;
+    color: #555;
+    text-align: center;
+    font-weight: 600;
+  }
+
+  .tap-hint {
+    position: absolute;
+    bottom: 14px;
+    font-size: 0.75rem;
+    color: #999;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+  }
+
+  /* Back face content */
+  .back-achievement {
+    font-size: 0.95rem;
+    text-align: center;
+    line-height: 1.5;
+    margin-bottom: 12px;
+    color: #e0e0e0;
+  }
+
+  .back-funfact {
+    background: rgba(245,166,35,0.12);
+    border: 1px solid rgba(245,166,35,0.3);
+    border-radius: 12px;
+    padding: 8px 14px;
+    font-size: 0.82rem;
+    text-align: center;
+    color: var(--gold);
+    line-height: 1.4;
+  }
+
+  .back-funfact::before {
+    content: '⭐ Fun Fact: ';
+    font-weight: 800;
+  }
+
+  /* ── NAV CONTROLS ── */
+  .card-nav {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 14px;
+    margin-bottom: 20px;
+  }
+
+  .nav-btn {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    border: 2px solid rgba(255,255,255,0.2);
+    background: rgba(255,255,255,0.07);
+    color: #fff;
+    font-size: 1.3rem;
+    cursor: pointer;
+    transition: all 0.2s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .nav-btn:hover { background: var(--gold); border-color: var(--gold); color: #1a0a2e; }
+
+  .shuffle-btn {
+    padding: 10px 22px;
+    border-radius: 24px;
+    border: 2px solid rgba(255,255,255,0.2);
+    background: rgba(255,255,255,0.07);
+    color: #fff;
+    font-family: 'Nunito', sans-serif;
+    font-size: 0.9rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+
+  .shuffle-btn:hover { background: var(--purple); border-color: var(--purple); }
+
+  /* ── PROGRESS BAR ── */
+  .progress-wrap {
+    max-width: 480px;
+    margin: 0 auto 10px;
+  }
+
+  .progress-bar {
+    height: 6px;
+    background: rgba(255,255,255,0.1);
+    border-radius: 6px;
+    overflow: hidden;
+  }
+
+  .progress-fill {
+    height: 100%;
+    background: linear-gradient(90deg, var(--gold), #FF6B6B);
+    border-radius: 6px;
+    transition: width 0.4s;
+  }
+
+  /* ── QUIZ SECTION ── */
+  .quiz-header {
+    text-align: center;
+    margin-bottom: 28px;
+  }
+
+  .quiz-header h2 {
+    font-size: 1.5rem;
+    font-weight: 900;
+    margin-bottom: 6px;
+  }
+
+  .quiz-score {
+    font-size: 0.9rem;
+    color: #aaa;
+  }
+
+  .quiz-score span {
+    color: var(--gold);
+    font-weight: 800;
+  }
+
+  .quiz-card {
+    max-width: 560px;
+    margin: 0 auto;
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 24px;
+    padding: 28px;
+  }
+
+  .quiz-question-type {
+    font-size: 0.75rem;
+    font-weight: 800;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 10px;
+  }
+
+  .quiz-question {
+    font-size: clamp(1rem, 3vw, 1.25rem);
+    font-weight: 800;
+    line-height: 1.4;
+    margin-bottom: 24px;
+    color: #fff;
+  }
+
+  .quiz-emoji {
+    font-size: 3rem;
+    text-align: center;
+    margin-bottom: 14px;
+  }
+
+  .quiz-options {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+  }
+
+  .quiz-option {
+    padding: 14px 16px;
+    border-radius: 16px;
+    border: 2px solid rgba(255,255,255,0.15);
+    background: rgba(255,255,255,0.05);
+    color: #fff;
+    font-family: 'Nunito', sans-serif;
+    font-size: 0.95rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.2s;
+    text-align: center;
+    line-height: 1.3;
+  }
+
+  .quiz-option:hover:not(:disabled) {
+    border-color: var(--gold);
+    background: rgba(245,166,35,0.1);
+    transform: translateY(-2px);
+  }
+
+  .quiz-option.correct {
+    background: rgba(39,174,96,0.3);
+    border-color: #27AE60;
+    color: #2ecc71;
+  }
+
+  .quiz-option.wrong {
+    background: rgba(192,57,43,0.3);
+    border-color: #C0392B;
+    color: #ff7675;
+  }
+
+  .quiz-option:disabled { cursor: default; }
+
+  .quiz-feedback {
+    margin-top: 18px;
+    padding: 14px;
+    border-radius: 14px;
+    font-size: 0.9rem;
+    font-weight: 700;
+    text-align: center;
+    display: none;
+  }
+
+  .quiz-feedback.show { display: block; }
+  .quiz-feedback.correct-fb { background: rgba(39,174,96,0.15); color: #2ecc71; border: 1px solid #27AE60; }
+  .quiz-feedback.wrong-fb  { background: rgba(192,57,43,0.15);  color: #ff7675; border: 1px solid #C0392B; }
+
+  .quiz-next-btn {
+    display: none;
+    margin: 18px auto 0;
+    padding: 12px 36px;
+    border-radius: 30px;
+    border: none;
+    background: var(--gold);
+    color: #1a0a2e;
+    font-family: 'Nunito', sans-serif;
+    font-size: 1rem;
+    font-weight: 900;
+    cursor: pointer;
+    transition: transform 0.2s;
+  }
+
+  .quiz-next-btn:hover { transform: scale(1.05); }
+
+  .quiz-streak {
+    text-align: center;
+    margin-top: 14px;
+    font-size: 0.85rem;
+    color: #aaa;
+  }
+
+  /* ── RESULTS SCREEN ── */
+  .results-screen {
+    display: none;
+    text-align: center;
+    max-width: 500px;
+    margin: 0 auto;
+    padding: 40px 20px;
+  }
+
+  .results-emoji { font-size: 5rem; margin-bottom: 16px; }
+  .results-title { font-size: 2rem; font-weight: 900; margin-bottom: 8px; color: var(--gold); }
+  .results-sub   { font-size: 1rem; color: #ccc; margin-bottom: 28px; }
+
+  .results-score-ring {
+    width: 160px;
+    height: 160px;
+    border-radius: 50%;
+    background: conic-gradient(var(--gold) 0deg, rgba(255,255,255,0.1) 0deg);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 28px;
+    position: relative;
+  }
+
+  .results-score-inner {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    background: var(--bg);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .results-pct   { font-size: 2rem; font-weight: 900; color: var(--gold); }
+  .results-label { font-size: 0.7rem; color: #aaa; }
+
+  .restart-btn {
+    padding: 14px 40px;
+    border-radius: 30px;
+    border: none;
+    background: var(--gold);
+    color: #1a0a2e;
+    font-family: 'Nunito', sans-serif;
+    font-size: 1.05rem;
+    font-weight: 900;
+    cursor: pointer;
+    transition: transform 0.2s;
+    margin: 6px;
+  }
+
+  .restart-btn:hover { transform: scale(1.05); }
+
+  .outline-btn {
+    padding: 14px 40px;
+    border-radius: 30px;
+    border: 2px solid rgba(255,255,255,0.2);
+    background: transparent;
+    color: #fff;
+    font-family: 'Nunito', sans-serif;
+    font-size: 1.05rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.2s;
+    margin: 6px;
+  }
+
+  .outline-btn:hover { border-color: var(--gold); color: var(--gold); }
+
+  /* ── FOOTER ── */
+  footer {
+    position: relative;
+    z-index: 10;
+    text-align: center;
+    padding: 16px;
+    font-size: 0.78rem;
+    color: rgba(255,255,255,0.3);
+    border-top: 1px solid rgba(255,255,255,0.07);
+  }
+
+  @media (max-width: 480px) {
+    .quiz-options { grid-template-columns: 1fr; }
+    .flip-card-wrapper { height: 280px; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="header-badge">✊🏾 Black Excellence in STEM</div>
+  <h1>100 STEM Heroes</h1>
+  <p>African American Pioneers Who Changed the World</p>
+  <div class="stats-bar">
+    <div class="stat">🔬 Science</div>
+    <div class="stat">💻 Technology</div>
+    <div class="stat">⚙️ Engineering</div>
+    <div class="stat">➕ Math</div>
+    <div class="stat">🏥 Medicine</div>
+    <div class="stat">🚀 Space</div>
+  </div>
+</header>
+
+<main>
+  <div class="mode-toggle">
+    <button class="mode-btn active" onclick="setMode('flashcard')">📚 Flashcards</button>
+    <button class="mode-btn" onclick="setMode('quiz')">🎯 Quiz Mode</button>
+  </div>
+
+  <!-- FLASHCARD SECTION -->
+  <div id="flashcard-section">
+    <div class="filters" id="filters">
+      <button class="filter-btn active" data-cat="All"         onclick="filterCards('All')" id="filter-all-btn">All</button>
+      <button class="filter-btn"        data-cat="Science"     onclick="filterCards('Science')">🔬 Science</button>
+      <button class="filter-btn"        data-cat="Tech"        onclick="filterCards('Tech')">💻 Tech</button>
+      <button class="filter-btn"        data-cat="Engineering" onclick="filterCards('Engineering')">⚙️ Engineering</button>
+      <button class="filter-btn"        data-cat="Math"        onclick="filterCards('Math')">➕ Math</button>
+      <button class="filter-btn"        data-cat="Medicine"    onclick="filterCards('Medicine')">🏥 Medicine</button>
+      <button class="filter-btn"        data-cat="Space"       onclick="filterCards('Space')">🚀 Space</button>
+    </div>
+
+    <div class="search-wrap">
+      <input type="text" id="search-input" placeholder="🔍 Search by name or field..." oninput="onSearch()">
+    </div>
+
+    <div class="card-counter" id="card-counter">Card 1 of 100</div>
+
+    <div class="progress-wrap">
+      <div class="progress-bar"><div class="progress-fill" id="progress-fill" style="width:1%"></div></div>
+    </div>
+
+    <div class="flip-card-wrapper" id="flip-card" onclick="flipCard()">
+      <div class="flip-card-inner" id="flip-inner">
+        <div class="flip-face flip-front" id="front-face">
+          <div class="card-photo-wrap" id="card-photo-wrap">
+            <span class="card-photo-emoji" id="card-emoji">🔬</span>
+          </div>
+          <div class="card-category-badge" id="card-badge">Science</div>
+          <div class="card-name" id="card-name">Loading…</div>
+          <div class="card-years" id="card-years"></div>
+          <div class="card-title" id="card-title"></div>
+          <div class="tap-hint">👆 Tap to learn more</div>
+        </div>
+        <div class="flip-face flip-back" id="back-face">
+          <div class="card-category-badge" id="back-badge">Science</div>
+          <div class="back-achievement" id="back-achievement"></div>
+          <div class="back-funfact" id="back-funfact"></div>
+          <div class="tap-hint" style="color:#888;">👆 Tap to flip back</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="card-nav">
+      <button class="nav-btn" onclick="prevCard()" title="Previous">←</button>
+      <button class="shuffle-btn" onclick="shuffleCards()">🔀 Shuffle</button>
+      <button class="nav-btn" onclick="nextCard()" title="Next">→</button>
+    </div>
+  </div>
+
+  <!-- QUIZ SECTION -->
+  <div id="quiz-section">
+    <div id="quiz-active">
+      <div class="quiz-header">
+        <h2>🎯 STEM Hero Quiz</h2>
+        <div class="quiz-score">Score: <span id="quiz-score">0</span> &nbsp;|&nbsp; Question: <span id="quiz-q-num">1</span> of 10</div>
+      </div>
+
+      <div class="quiz-card">
+        <div class="quiz-emoji" id="quiz-emoji">🔬</div>
+        <div class="quiz-question-type" id="quiz-q-type">WHO IS THIS?</div>
+        <div class="quiz-question" id="quiz-question">Loading question…</div>
+        <div class="quiz-options" id="quiz-options"></div>
+        <div class="quiz-feedback" id="quiz-feedback"></div>
+        <div style="text-align:center"><button class="quiz-next-btn" id="quiz-next" onclick="nextQuestion()">Next Question →</button></div>
+        <div class="quiz-streak" id="quiz-streak"></div>
+      </div>
+    </div>
+
+    <div class="results-screen" id="results-screen">
+      <div class="results-emoji" id="results-emoji">🏆</div>
+      <div class="results-title" id="results-title">Amazing!</div>
+      <div class="results-sub" id="results-sub">You completed the quiz!</div>
+      <div class="results-score-ring" id="results-ring">
+        <div class="results-score-inner">
+          <div class="results-pct" id="results-pct">0%</div>
+          <div class="results-label">Score</div>
+        </div>
+      </div>
+      <div>
+        <button class="restart-btn" onclick="restartQuiz()">🔄 Play Again</button>
+        <button class="outline-btn" onclick="setMode('flashcard')">📚 Study Cards</button>
+      </div>
+    </div>
+  </div>
+</main>
+
+<footer>Made with ❤️ to celebrate Black Excellence &nbsp;|&nbsp; <span id="footer-count">189</span> African American STEM Pioneers<br>
+  <span style="font-size:0.7rem;opacity:0.5;">Photos courtesy of <a href="https://commons.wikimedia.org" target="_blank" style="color:inherit;">Wikimedia Commons</a> under Public Domain &amp; Creative Commons licenses</span></footer>
+
+<script>
+const STEM_HEROES = [
+  // ── SCIENCE ──
+  { id:1,  name:"George Washington Carver",     years:"1864–1943", cat:"Science",     emoji:"🌾", title:"Agricultural Scientist",
+    photo:"https://upload.wikimedia.org/wikipedia/commons/thumb/a/af/George_Washington_Carver_c1910_-_Restoration.jpg/300px-George_Washington_Carver_c1910_-_Restoration.jpg",
+    achievement:"Discovered over 300 uses for peanuts, 100 uses for sweet potatoes, and transformed Southern farming. His work helped poor Black farmers thrive after the Civil War.",
+    funfact:"He was born into slavery but went on to become one of the most celebrated scientists in American history." },
+
+  { id:2,  name:"Ernest Everett Just",          years:"1883–1941", cat:"Science",     emoji:"🦠", title:"Marine Biologist & Cell Scientist",
+    achievement:"Pioneered research into how cells fertilize and develop. His book 'The Biology of the Cell Surface' revolutionized biology.",
+    funfact:"He worked at the Marine Biological Laboratory in Woods Hole, MA — the first Black scientist to do so." },
+
+  { id:3,  name:"Percy Julian",                 years:"1899–1975", cat:"Science",     emoji:"⚗️", title:"Chemist",
+    photo:"https://upload.wikimedia.org/wikipedia/commons/thumb/5/57/Percy_Julian.jpg/300px-Percy_Julian.jpg",
+    achievement:"Synthesized physostigmine (treating glaucoma) and cortisone from soybeans, making these medicines affordable for millions.",
+    funfact:"His home was bombed twice by racists after he moved to a white neighborhood — he refused to leave." },
+
+  { id:4,  name:"Charles Henry Turner",         years:"1867–1923", cat:"Science",     emoji:"🐜", title:"Zoologist & Animal Behaviorist",
+    achievement:"First person to prove that insects can hear and learn — discovered that bees can see colors. Published over 70 scientific papers.",
+    funfact:"The 'Turner circling' in cockroaches — where they spin in circles — was named after his discoveries." },
+
+  { id:5,  name:"Lloyd Hall",                   years:"1894–1971", cat:"Science",     emoji:"🧪", title:"Food Chemist",
+    achievement:"Invented a way to sterilize food and spices using ethylene oxide gas, making our food supply dramatically safer. Held over 100 patents.",
+    funfact:"He was denied a job by a Chicago employer who realized he was Black after the interview — so he started his own research firm." },
+
+  { id:6,  name:"Herman Branson",               years:"1914–1995", cat:"Science",     emoji:"🧬", title:"Physicist & Biochemist",
+    achievement:"Co-discovered the alpha-helix structure of proteins — a foundational finding in molecular biology and understanding DNA.",
+    funfact:"Linus Pauling later won the Nobel Prize partly based on the protein structure work that Branson helped develop." },
+
+  { id:7,  name:"Emmett Chappelle",             years:"1925–2019", cat:"Science",     emoji:"🌿", title:"NASA Biochemist",
+    achievement:"NASA's Goddard Space Flight Center scientist who discovered that firefly enzymes could detect bacteria — revolutionizing food safety and space biology.",
+    funfact:"He holds 14 patents and his work is still used today to test for bacterial contamination in food and water." },
+
+  { id:8,  name:"Walter Lincoln Hawkins",       years:"1911–1992", cat:"Science",     emoji:"📞", title:"Chemist at Bell Labs",
+    achievement:"Invented a plastic coating for telephone cables that didn't crack in the sun or cold — making long-distance phone calls possible across America.",
+    funfact:"Without his invention, the modern telephone network as we know it could not have been built." },
+
+  { id:9,  name:"Warren Washington",            years:"1936–",     cat:"Science",     emoji:"🌤️", title:"Atmospheric Scientist",
+    achievement:"Pioneered the computer models that simulate Earth's climate, enabling modern weather forecasting and climate science.",
+    funfact:"He received the National Medal of Science in 2010 — one of the highest honors a scientist can receive in the U.S." },
+
+  { id:10, name:"Neil deGrasse Tyson",          years:"1958–",     cat:"Science",     emoji:"🔭", title:"Astrophysicist & Science Communicator",
+    photo:"https://upload.wikimedia.org/wikipedia/commons/thumb/8/82/Neil_deGrasse_Tyson_in_June_2017_%28cropped%29.jpg/300px-Neil_deGrasse_Tyson_in_June_2017_%28cropped%29.jpg",
+    achievement:"Director of the Hayden Planetarium and one of the world's most famous science communicators, inspiring millions through TV, books, and podcasts.",
+    funfact:"As a teenager in the Bronx, he carried binoculars to look at stars — police sometimes stopped him, thinking he was a burglar." },
+
+  { id:11, name:"Hildrus Poindexter",           years:"1901–1987", cat:"Science",     emoji:"🦟", title:"Microbiologist & Tropical Disease Expert",
+    achievement:"World expert on tropical diseases including malaria and dysentery; his research protected U.S. troops in WWII.",
+    funfact:"He earned degrees from Dartmouth, Harvard, and Columbia — three Ivy League degrees during an era of rampant racial segregation." },
+
+  { id:12, name:"James Harris",                years:"1932–2000", cat:"Science",     emoji:"⚛️", title:"Nuclear Chemist",
+    achievement:"Key member of the team at Lawrence Berkeley Lab that discovered elements 104 (Rutherfordium) and 105 (Dubnium), expanding the periodic table.",
+    funfact:"He was the first African American to co-discover a chemical element — and his name is rarely taught in schools." },
+
+  { id:13, name:"Roger Arliner Young",          years:"1899–1964", cat:"Science",     emoji:"🔬", title:"Zoologist",
+    achievement:"First African American woman to receive a PhD in zoology, and one of the first Black women to publish in science journals.",
+    funfact:"Despite facing discrimination that disrupted her career, she published research on marine organisms that remains cited today." },
+
+  { id:14, name:"Flemmie Pansy Kittrell",       years:"1904–1980", cat:"Science",     emoji:"🍽️", title:"Nutritionist",
+    achievement:"First African American woman to earn a PhD in nutrition; her international work on child nutrition and hunger helped reshape global food policy.",
+    funfact:"She took her research to India, Liberia, and Guinea — studying malnutrition and helping communities improve their diets." },
+
+  { id:15, name:"Edward Bouchet",               years:"1852–1918", cat:"Science",     emoji:"⚡", title:"Physicist",
+    achievement:"First African American to earn a PhD in physics (Yale, 1876) — and only the sixth person in America to earn a physics doctorate at all.",
+    funfact:"Despite his historic achievement, he was blocked from research careers by racism and spent his life as a high school science teacher." },
+
+  // ── TECHNOLOGY ──
+  { id:16, name:"Mark Dean",                   years:"1957–",     cat:"Tech",        emoji:"💻", title:"Computer Architect",
+    achievement:"Co-invented the IBM personal computer in 1981 — he holds 3 of the 9 original IBM PC patents. Later led the team that built the first gigahertz chip.",
+    funfact:"He now owns a computer that is more powerful than the IBM PC he helped invent — because he thinks the PC era is over." },
+
+  { id:17, name:"Jerry Lawson",                years:"1940–2011", cat:"Tech",        emoji:"🎮", title:"Father of Modern Video Gaming",
+    photo:"https://upload.wikimedia.org/wikipedia/commons/thumb/0/01/Jerry_Lawson_-_Computer_History_Museum.jpg/300px-Jerry_Lawson_-_Computer_History_Museum.jpg",
+    achievement:"Invented the first home video game console with interchangeable cartridges — the Fairchild Channel F (1976). This is how ALL video game systems work today.",
+    funfact:"He was a self-taught engineer who never had a computer science degree but revolutionized gaming for everyone." },
+
+  { id:18, name:"Katherine Johnson",           years:"1918–2020", cat:"Tech",        emoji:"🧮", title:"NASA Mathematician",
+    photo:"https://upload.wikimedia.org/wikipedia/commons/thumb/d/dc/Katherine_Johnson_at_NASA%2C_in_1966.jpg/300px-Katherine_Johnson_at_NASA%2C_in_1966.jpg",
+    achievement:"Calculated the flight trajectories for Apollo 11's moon landing and John Glenn's orbital missions. NASA called her a 'human computer.'",
+    funfact:"John Glenn refused to fly his orbital mission until Katherine Johnson personally verified the computer calculations — he trusted her that much." },
+
+  { id:19, name:"Dorothy Vaughan",             years:"1910–2008", cat:"Tech",        emoji:"📊", title:"NASA Mathematician & FORTRAN Pioneer",
+    photo:"https://upload.wikimedia.org/wikipedia/commons/thumb/3/31/Dorothy_Vaughan_NASA_DP.jpg/300px-Dorothy_Vaughan_NASA_DP.jpg",
+    achievement:"First African American woman manager at NASA/NACA; taught herself FORTRAN and trained her team, ensuring Black women stayed relevant in the computer age.",
+    funfact:"When NASA got real computers, she checked out a FORTRAN book from a 'whites only' library — they wouldn't let her keep it." },
+
+  { id:20, name:"Mary Jackson",                years:"1921–2005", cat:"Tech",        emoji:"✈️", title:"NASA Aerospace Engineer",
+    photo:"https://upload.wikimedia.org/wikipedia/commons/thumb/b/b7/Mary_W._Jackson_%40_NASA.jpg/300px-Mary_W._Jackson_%40_NASA.jpg",
+    achievement:"NASA's first Black female engineer; her aerodynamics research helped design aircraft and spacecraft that put Americans in orbit and on the moon.",
+    funfact:"She had to petition the city of Hampton, VA for permission to attend the 'whites only' classes she needed to become an engineer." },
+
+  { id:21, name:"Annie Easley",                years:"1933–2011", cat:"Tech",        emoji:"🚀", title:"NASA Computer Scientist",
+    achievement:"Developed the software used in Centaur rocket launches and researched batteries for hybrid vehicles — decades before hybrid cars were common.",
+    funfact:"When she started at NASA in 1955, she was one of only four Black employees at the entire facility." },
+
+  { id:22, name:"Gladys West",                 years:"1930–",     cat:"Tech",        emoji:"📡", title:"GPS Pioneer",
+    photo:"https://upload.wikimedia.org/wikipedia/commons/thumb/6/6c/Gladys_West.jpg/300px-Gladys_West.jpg",
+    achievement:"Developed the mathematical models that made GPS possible — her precise calculations of Earth's shape became the foundation of the Global Positioning System.",
+    funfact:"She wasn't even inducted into the Air Force Space and Missile Pioneers Hall of Fame until 2018 — nearly 60 years after her pivotal work." },
+
+  { id:23, name:"Clarence 'Skip' Ellis",       years:"1943–2014", cat:"Tech",        emoji:"🖥️", title:"Computer Scientist",
+    achievement:"First African American to earn a PhD in computer science; co-invented the first graphical interface for office computing (OfficeTalk at XEROX PARC).",
+    funfact:"He grew up in the Chicago projects, hacked his way into computer access as a teenager, and ended up at the lab that invented modern computing." },
+
+  { id:24, name:"Philip Emeagwali",            years:"1954–",     cat:"Tech",        emoji:"🌐", title:"Supercomputer Pioneer",
+    achievement:"Programmed the CM-2 Connection Machine to perform 3.1 billion calculations per second — a world record in 1989 that helped simulate oil reservoir behavior.",
+    funfact:"He was born in Nigeria, survived the Biafran war, and self-taught mathematics using library books before winning computing's highest prize." },
+
+  { id:25, name:"Marian Croak",                years:"1956–",     cat:"Tech",        emoji:"📱", title:"VoIP Technology Pioneer",
+    achievement:"Holds over 200 patents and developed Voice over Internet Protocol (VoIP) technology — making FaceTime, Zoom, and internet calling possible for everyone.",
+    funfact:"She now leads Responsible AI efforts at Google and was inducted into the National Inventors Hall of Fame in 2022." },
+
+  { id:26, name:"Roy Clay Sr.",                years:"1929–",     cat:"Tech",        emoji:"🖨️", title:"Hewlett-Packard's First Black Engineer",
+    achievement:"Led development of HP's first minicomputer — the HP 2116A — in the 1960s, helping establish Silicon Valley as a tech hub.",
+    funfact:"When he tried to buy a home near HP's office, realtors refused to sell to him because of his race. He later founded his own tech company." },
+
+  { id:27, name:"Donna Auguste",               years:"1958–",     cat:"Tech",        emoji:"📲", title:"Mobile Tech Pioneer",
+    achievement:"One of the key engineers behind Apple's Newton, the first personal digital assistant — the ancestor of every smartphone and tablet.",
+    funfact:"She grew up in poverty, was the first in her family to attend college, and became a tech executive and social entrepreneur." },
+
+  { id:28, name:"Kimberly Bryant",             years:"1967–",     cat:"Tech",        emoji:"👩🏾‍💻", title:"Founder of Black Girls Code",
+    achievement:"Founded Black Girls Code in 2011 to teach coding and technology to girls of color — has now reached tens of thousands of girls across 15 cities.",
+    funfact:"She was inspired to start the organization after seeing her daughter was the only Black girl at a coding camp." },
+
+  { id:29, name:"Timnit Gebru",                years:"1983–",     cat:"Tech",        emoji:"🤖", title:"AI Ethics Researcher",
+    achievement:"Pioneering researcher exposing bias in artificial intelligence; her work 'Gender Shades' proved facial recognition systems perform far worse on Black women's faces.",
+    funfact:"She grew up as a refugee from Eritrea, earned her PhD from Stanford, and is now one of the most influential voices in AI safety worldwide." },
+
+  { id:30, name:"Valerie Thomas",              years:"1943–",     cat:"Tech",        emoji:"📺", title:"NASA Scientist & Inventor",
+    achievement:"Invented the illusion transmitter — a device that transmits 3D images using concave mirrors, now used in medical imaging and NASA technologies.",
+    funfact:"She got the patent in 1980 and NASA has since used her invention's principles in satellite technology and medical equipment." },
+
+  { id:31, name:"Raye Montague",               years:"1935–2018", cat:"Tech",        emoji:"⚓", title:"Naval Engineer",
+    achievement:"First person to design a naval ship by computer — she programmed the first computer-generated rough draft of a U.S. Navy ship in under 19 hours (a task that normally took months).",
+    funfact:"Inspired to join the Navy as a child after touring a German submarine, she faced both racial and gender barriers her entire career." },
+
+  { id:32, name:"James West",                  years:"1931–",     cat:"Tech",        emoji:"🎙️", title:"Microphone Inventor",
+    achievement:"Co-invented the electret microphone in 1962 — the technology used in 90% of all microphones today, from phones to hearing aids to voice assistants.",
+    funfact:"He holds over 250 patents and has been inducted into the National Inventors Hall of Fame. The microphone in your phone is based on his invention." },
+
+  // ── ENGINEERING ──
+  { id:33, name:"Elijah McCoy",                years:"1844–1929", cat:"Engineering", emoji:"🚂", title:"Mechanical Engineer",
+    achievement:"Invented automatic lubrication devices for steam engines and trains — people demanded only his authentic devices, which is the origin of the phrase 'the real McCoy.'",
+    funfact:"He filed over 57 patents in his lifetime and his lubricators were so superior that buyers would ask if machines had 'the real McCoy' model." },
+
+  { id:34, name:"Granville T. Woods",          years:"1856–1910", cat:"Engineering", emoji:"⚡", title:"Electrical Engineer",
+    achievement:"Invented the railway telegraph — letting moving trains communicate with each other and the station — preventing countless crashes. Also invented improvements to electric motors.",
+    funfact:"Both Thomas Edison and Alexander Graham Bell tried to claim credit for his inventions. Woods sued them both — and won." },
+
+  { id:35, name:"Lewis Latimer",               years:"1848–1928", cat:"Engineering", emoji:"💡", title:"Inventor & Engineer",
+    photo:"https://upload.wikimedia.org/wikipedia/commons/thumb/d/d2/Lewis_Howard_Latimer_-_1882.jpg/300px-Lewis_Howard_Latimer_-_1882.jpg",
+    achievement:"Invented the carbon filament that made the lightbulb practical and long-lasting. Without his improvement, Edison's bulb would have burned out too quickly to be useful.",
+    funfact:"He was the son of escaped slaves and taught himself drafting and engineering — he drew the patent drawings for Alexander Graham Bell's telephone." },
+
+  { id:36, name:"Garrett Morgan",              years:"1877–1963", cat:"Engineering", emoji:"🚦", title:"Inventor",
+    photo:"https://upload.wikimedia.org/wikipedia/commons/thumb/7/73/Garrett_Morgan.jpg/300px-Garrett_Morgan.jpg",
+    achievement:"Invented the three-position traffic signal (adding the yellow light) and the gas mask, which saved lives in WWI and is still used today by firefighters.",
+    funfact:"He personally used his gas mask to rescue workers trapped in a tunnel explosion under Lake Erie — because no one else was willing to go in." },
+
+  { id:37, name:"Jan Ernst Matzeliger",        years:"1852–1889", cat:"Engineering", emoji:"👟", title:"Inventor",
+    achievement:"Invented the shoe lasting machine that automated shoemaking — reducing the price of shoes by half and making affordable footwear available to ordinary people.",
+    funfact:"He died at 37 from tuberculosis without seeing how his invention transformed the shoe industry. His machine was so complex it took engineers years to fully understand it." },
+
+  { id:38, name:"Frederick McKinley Jones",    years:"1893–1961", cat:"Engineering", emoji:"❄️", title:"Inventor",
+    achievement:"Invented portable refrigeration for trucks and trains — making it possible to transport fresh food, blood, and medicine across the country. Transformed the food supply chain.",
+    funfact:"His refrigeration units kept blood and medicine cold for Allied troops in WWII — literally saving thousands of lives on the battlefield." },
+
+  { id:39, name:"Andrew Beard",                years:"1849–1921", cat:"Engineering", emoji:"🚃", title:"Inventor",
+    achievement:"Invented the automatic railroad car coupler — eliminating the dangerous job of manually connecting train cars, which killed and maimed thousands of workers every year.",
+    funfact:"He was born into slavery and lost his leg in a railroad coupling accident — which inspired him to invent a safer automatic coupler." },
+
+  { id:40, name:"Norbert Rillieux",            years:"1806–1894", cat:"Engineering", emoji:"⚗️", title:"Chemical Engineer",
+    achievement:"Invented the multiple-effect evaporator that transformed sugar production — making sugar refining safer, faster, and cheaper worldwide.",
+    funfact:"His invention is still used in the production of soap, gelatin, glue, and many foods — his impact on the chemical engineering field is immeasurable." },
+
+  { id:41, name:"Otis Boykin",                 years:"1920–1982", cat:"Engineering", emoji:"❤️", title:"Electronic Engineer",
+    achievement:"Invented 28 electronic devices including a resistor used in all guided missiles and IBM computers — and the control unit that made modern pacemakers reliable.",
+    funfact:"Tragically, he died of heart failure — the very condition his pacemaker invention helps control in millions of patients worldwide." },
+
+  { id:42, name:"Mary Beatrice Davidson Kenner", years:"1912–2006", cat:"Engineering", emoji:"🛡️", title:"Inventor",
+    achievement:"Invented the sanitary belt with built-in moisture protection (1957) — improving women's health and hygiene. Held 5 patents, the most of any Black woman at the time.",
+    funfact:"A company initially wanted to license her invention but withdrew after learning she was Black — it took 30 years before a company finally produced it." },
+
+  { id:43, name:"Alice H. Parker",             years:"1895–1920", cat:"Engineering", emoji:"🔥", title:"Inventor",
+    achievement:"Invented a gas heating furnace in 1919 that could heat different rooms at different temperatures — a concept foundational to modern central heating and zone control.",
+    funfact:"Her invention predated widespread adoption of central heating and influenced the design of HVAC systems used in buildings today." },
+
+  { id:44, name:"Meredith Gourdine",           years:"1929–1998", cat:"Engineering", emoji:"⚡", title:"Physicist & Engineer",
+    achievement:"Pioneered Electrogasdynamics — using high-speed gases to generate electricity. His company developed fog dispersal systems still used at airports today.",
+    funfact:"He was a silver medalist in the long jump at the 1952 Helsinki Olympics before becoming an acclaimed physicist and engineer." },
+
+  { id:45, name:"Archie Alexander",            years:"1888–1958", cat:"Engineering", emoji:"🌉", title:"Civil Engineer",
+    achievement:"One of the first Black civil engineers; his firm built major bridges, tunnels, highways, and airfields including part of Washington D.C.'s infrastructure.",
+    funfact:"Despite his engineering success, he was still denied hotel rooms in cities where his bridges were being built because of racial segregation." },
+
+  { id:46, name:"Henry T. Sampson",            years:"1934–2015", cat:"Engineering", emoji:"📻", title:"Inventor",
+    achievement:"Co-invented the gamma-electric cell (1971) and made major contributions to solid rocket motor technology. His electrical device work influenced cellular phone development.",
+    funfact:"He held a PhD in nuclear engineering from the University of Illinois and later earned a second degree in film history." },
+
+  { id:47, name:"Alexander Miles",             years:"1838–1918", cat:"Engineering", emoji:"🏢", title:"Inventor",
+    achievement:"Invented the automatic elevator door mechanism — making elevator doors open and close automatically, preventing the accidents that killed passengers when manual doors were left open.",
+    funfact:"Before his invention, elevator riders could fall down the shaft if they forgot to close the door. His design became the standard for all modern elevators." },
+
+  { id:48, name:"Thomas Mensah",               years:"1950–",     cat:"Engineering", emoji:"🌐", title:"Chemical Engineer",
+    achievement:"Pioneered fiber optic cable manufacturing and holds patents that underpin the internet's infrastructure — including high-speed data transmission.",
+    funfact:"Born in Ghana, he came to the U.S. and holds over 7 patents on fiber optics — the technology behind internet cables that cross the ocean floor." },
+
+  // ── MATHEMATICS ──
+  { id:49, name:"Benjamin Banneker",           years:"1731–1806", cat:"Math",        emoji:"⏰", title:"Mathematician & Astronomer",
+    photo:"https://upload.wikimedia.org/wikipedia/commons/thumb/4/42/Benjamin_Banneker_%28copy_of_lost_portrait%29.jpg/300px-Benjamin_Banneker_%28copy_of_lost_portrait%29.jpg",
+    achievement:"Self-taught astronomer who published accurate almanacs for 6 years and helped survey Washington D.C. — and sent Thomas Jefferson a letter challenging his belief in slavery.",
+    funfact:"He built America's first striking clock entirely from wood by studying a pocket watch — it kept accurate time for over 40 years." },
+
+  { id:50, name:"David Blackwell",             years:"1919–2010", cat:"Math",        emoji:"🎲", title:"Statistician & Mathematician",
+    achievement:"Made foundational contributions to statistics, probability, and game theory. The Rao-Blackwell theorem — one of statistics' most important results — bears his name.",
+    funfact:"He was elected to the National Academy of Sciences in 1965 — the first African American to be elected. He was initially denied a fellowship at the Institute for Advanced Study because of his race." },
+
+  { id:51, name:"J. Ernest Wilkins Jr.",       years:"1923–2011", cat:"Math",        emoji:"🔢", title:"Mathematician & Nuclear Engineer",
+    achievement:"Entered the University of Chicago at age 13 and earned a PhD in mathematics at 19 — one of the youngest ever. Worked on the Manhattan Project and advanced nuclear reactor shielding.",
+    funfact:"He was a prodigy who began university at 13, but when he showed up in Oak Ridge for work, the facility was segregated and he couldn't live near his colleagues." },
+
+  { id:52, name:"Marjorie Lee Browne",         years:"1914–1979", cat:"Math",        emoji:"📐", title:"Mathematician",
+    achievement:"One of the first African American women to receive a PhD in mathematics (1949). Pioneered computer science education at HBCUs and won a national computing grant.",
+    funfact:"She used her personal salary to fund gifted math students — and was so respected that Duke University gave her its first computing grant worth $60,000." },
+
+  { id:53, name:"Euphemia Lofton Haynes",      years:"1890–1980", cat:"Math",        emoji:"📏", title:"Mathematician",
+    achievement:"First African American woman to earn a PhD in mathematics (Catholic University, 1943); spent 47 years teaching in Washington D.C. public schools and fought for educational equality.",
+    funfact:"She donated $700,000 to Catholic University to fund scholarships for minority students — giving back to education after a lifetime of service." },
+
+  { id:54, name:"Evelyn Boyd Granville",       years:"1924–2023", cat:"Math",        emoji:"🌙", title:"Mathematician",
+    achievement:"One of the first two African American women to earn PhDs in mathematics; worked at IBM and NASA computing trajectories for Project Mercury and Apollo missions.",
+    funfact:"She grew up in Washington D.C. during segregation and later said her teachers never told her what she couldn't do — which made all the difference." },
+
+  { id:55, name:"Gloria Conyers Hewitt",       years:"1935–",     cat:"Math",        emoji:"🔺", title:"Mathematician",
+    achievement:"Expert in abstract algebra and group theory; spent decades teaching at the University of Montana and mentoring generations of minority mathematics students.",
+    funfact:"She grew up in Sumter, SC during Jim Crow segregation and became one of only a handful of Black women with a math PhD in the 1960s." },
+
+  { id:56, name:"Fern Hunt",                   years:"1948–",     cat:"Math",        emoji:"📊", title:"Applied Mathematician",
+    achievement:"Research mathematician at the National Institute of Standards and Technology (NIST); applied mathematics to computer graphics, biology, and chaos theory.",
+    funfact:"She developed mathematical models for color matching — her work is used in industries from printing to paint manufacturing." },
+
+  { id:57, name:"Clarence F. Stephens",        years:"1917–2018", cat:"Math",        emoji:"🎓", title:"Mathematics Educator",
+    achievement:"Transformed Potsdam's math department into one of the most successful in the country — producing more Black math PhDs than almost any other institution.",
+    funfact:"His teaching philosophy emphasized nurturing potential over gatekeeping talent — and it worked: his students went on to lead mathematics departments across America." },
+
+  { id:58, name:"Elbert Frank Cox",            years:"1895–1969", cat:"Math",        emoji:"∞", title:"Mathematician",
+    achievement:"First African American (and possibly first Black person in the world) to earn a PhD in mathematics (Cornell, 1925). Spent decades inspiring math students at Howard University.",
+    funfact:"When he applied to graduate school in Japan as a backup plan, the Japanese government was skeptical that an American university would give a Black man a math doctorate." },
+
+  { id:59, name:"Johnny Houston",              years:"1941–",     cat:"Math",        emoji:"🤝", title:"Mathematician & Advocate",
+    achievement:"Co-founded the National Association of Mathematicians (NAM) in 1969, dedicated to promoting excellence in mathematical sciences among underrepresented communities.",
+    funfact:"He has spent his career ensuring Black students have access to math conferences, journals, and professional networks that were historically closed to them." },
+
+  { id:60, name:"Roscoe Giles",                years:"1952–",     cat:"Math",        emoji:"🖥️", title:"Computer Scientist & Mathematician",
+    achievement:"One of the first African Americans to earn a PhD in computer science (Stanford, 1980); expert in parallel computing and high-performance systems.",
+    funfact:"He is a former chair of the board of directors of the Computing Research Association and has worked to increase diversity in computing for decades." },
+
+  // ── MEDICINE ──
+  { id:61, name:"Daniel Hale Williams",        years:"1856–1931", cat:"Medicine",    emoji:"🫀", title:"Surgeon",
+    photo:"https://upload.wikimedia.org/wikipedia/commons/thumb/9/9a/Daniel_Hale_Williams.jpg/300px-Daniel_Hale_Williams.jpg",
+    achievement:"Performed one of the first successful open-heart surgeries in 1893 — suturing a patient's heart with no modern equipment. The patient lived for 20 more years.",
+    funfact:"He also founded Provident Hospital in Chicago — the first hospital in America that admitted patients regardless of race." },
+
+  { id:62, name:"Charles Drew",                years:"1904–1950", cat:"Medicine",    emoji:"🩸", title:"Blood Banking Pioneer",
+    photo:"https://upload.wikimedia.org/wikipedia/commons/thumb/d/d6/Charles_R._Drew.jpg/300px-Charles_R._Drew.jpg",
+    achievement:"Developed the blood bank system used during WWII — his techniques for storing and preserving blood plasma saved countless lives on the battlefield.",
+    funfact:"He resigned from the American Red Cross when they insisted on segregating blood by race — a policy he knew had no scientific basis." },
+
+  { id:63, name:"Rebecca Lee Crumpler",        years:"1831–1895", cat:"Medicine",    emoji:"👩🏾‍⚕️", title:"Physician",
+    achievement:"First African American woman to earn an MD degree in the United States (1864). After the Civil War, she devoted her life to caring for freed Black people denied medical care.",
+    funfact:"She published 'A Book of Medical Discourses' in 1883 — one of the first medical texts written by an African American and focused on women's and children's health." },
+
+  { id:64, name:"Vivien Thomas",               years:"1910–1985", cat:"Medicine",    emoji:"🔪", title:"Surgical Pioneer",
+    achievement:"Developed the surgical technique to treat 'blue baby syndrome' (cyanotic heart disease) in children — saving thousands of young lives. He did this with only a high school diploma.",
+    funfact:"His portrait hangs in Johns Hopkins Hospital alongside those of PhDs and MDs — honoring a man who worked as a janitor there before becoming a pioneering surgical technician." },
+
+  { id:65, name:"Jane Cooke Wright",           years:"1919–2013", cat:"Medicine",    emoji:"💊", title:"Cancer Research Pioneer",
+    achievement:"Pioneered the use of chemotherapy for cancer — discovered that methotrexate could treat breast cancer and leukemia, fundamentally changing cancer treatment.",
+    funfact:"She was among the first women elected to the American Cancer Society — and her father was also a pioneering cancer researcher who she collaborated with." },
+
+  { id:66, name:"Patricia Bath",               years:"1942–2019", cat:"Medicine",    emoji:"👁️", title:"Ophthalmologist & Inventor",
+    photo:"https://upload.wikimedia.org/wikipedia/commons/thumb/5/5c/Patricia_Bath.jpg/300px-Patricia_Bath.jpg",
+    achievement:"Invented the Laserphaco Probe (1981) — a revolutionary device that uses lasers to vaporize cataracts, restoring sight to people blinded for decades.",
+    funfact:"She was the first African American woman doctor to receive a medical patent — and she used her device to restore sight to patients who had been blind for 30 years." },
+
+  { id:67, name:"Samuel Lee Kountz",           years:"1930–1981", cat:"Medicine",    emoji:"🫘", title:"Transplant Surgery Pioneer",
+    achievement:"Performed more kidney transplants than anyone in the world at his peak — pioneering techniques that are still foundational to organ transplantation today.",
+    funfact:"He performed the first kidney transplant between people who weren't identical twins — dramatically expanding who could receive a transplant." },
+
+  { id:68, name:"Alexa Canady",                years:"1950–",     cat:"Medicine",    emoji:"🧠", title:"Neurosurgeon",
+    achievement:"First African American woman neurosurgeon in the United States. Spent over 20 years caring for children with brain and spinal cord conditions at Children's Hospital of Michigan.",
+    funfact:"She chose pediatric neurosurgery specifically to help children — saying she was drawn to it because the patients couldn't give up on themselves the way adults sometimes do." },
+
+  { id:69, name:"Joycelyn Elders",             years:"1933–",     cat:"Medicine",    emoji:"🏛️", title:"Physician & U.S. Surgeon General",
+    achievement:"First African American and second woman to serve as U.S. Surgeon General (1993). Championed childhood health, sex education, and public health equity.",
+    funfact:"Growing up in rural Arkansas, she picked cotton to save money for college. She became one of the most powerful physicians in American history." },
+
+  { id:70, name:"Ben Carson",                  years:"1951–",     cat:"Medicine",    emoji:"✂️", title:"Pediatric Neurosurgeon",
+    achievement:"Performed the first successful separation of conjoined twins joined at the back of the head (1987) — a 22-hour surgery that saved both lives.",
+    funfact:"He grew up in poverty in Detroit, nearly failed school, but his mother's insistence on reading transformed him into one of America's most celebrated neurosurgeon." },
+
+  { id:71, name:"Kizzmekia Corbett",           years:"1986–",     cat:"Medicine",    emoji:"💉", title:"Viral Immunologist",
+    achievement:"Led the team at NIH that developed the foundational technology behind the Moderna COVID-19 vaccine — one of the fastest vaccines ever created in history.",
+    funfact:"She grew up in Hurdle Mills, NC (population ~250), inspired by a science teacher who believed in her — and she went on to help save millions of lives worldwide." },
+
+  { id:72, name:"Louis Tompkins Wright",       years:"1891–1952", cat:"Medicine",    emoji:"🏥", title:"Surgeon",
+    achievement:"First Black physician to be appointed to a New York City municipal hospital staff; pioneered the use of aureomycin antibiotic and advanced cancer treatment research.",
+    funfact:"A Harvard Medical School graduate, he was denied internship at Boston City Hospital because of his race — so he returned to Atlanta to practice medicine for Black patients." },
+
+  { id:73, name:"Solomon Carter Fuller",       years:"1872–1953", cat:"Medicine",    emoji:"🧩", title:"Psychiatrist",
+    achievement:"First African American psychiatrist in the United States; conducted early research on Alzheimer's disease alongside Dr. Alzheimer himself in Germany.",
+    funfact:"He studied Alzheimer's disease before it was even called Alzheimer's — and his groundbreaking work has been largely unrecognized until recently." },
+
+  { id:74, name:"James McCune Smith",          years:"1813–1865", cat:"Medicine",    emoji:"📚", title:"Physician & Abolitionist",
+    achievement:"First African American to hold a medical degree (University of Glasgow, 1837) and first to run a pharmacy in America — and used his science to argue against slavery.",
+    funfact:"He was born into slavery in New York, freed by the Emancipation Act of 1827, and went to Scotland to get the education America denied him." },
+
+  { id:75, name:"Georgia Dwelle",              years:"1884–1953", cat:"Medicine",    emoji:"👶", title:"Obstetrician-Gynecologist",
+    achievement:"One of the first African American women OBGYNs in the U.S.; founded a hospital for Black women in Atlanta when segregation barred them from receiving proper medical care.",
+    funfact:"Her hospital provided care that was literally unavailable anywhere else in Atlanta for Black mothers and their newborns during the Jim Crow era." },
+
+  // ── SPACE ──
+  { id:76, name:"Mae Jemison",                 years:"1956–",     cat:"Space",       emoji:"🌌", title:"Astronaut & Physician",
+    photo:"https://upload.wikimedia.org/wikipedia/commons/thumb/e/ee/Dr._Mae_C._Jemison.jpg/300px-Dr._Mae_C._Jemison.jpg",
+    achievement:"First African American woman to travel to space — aboard the Space Shuttle Endeavour in 1992. She is also a physician, engineer, and Peace Corps volunteer.",
+    funfact:"She was inspired by Lt. Uhura on Star Trek as a child — and she later appeared as a guest star on Star Trek: The Next Generation, the only real astronaut to appear on the show." },
+
+  { id:77, name:"Guion 'Guy' Bluford",         years:"1942–",     cat:"Space",       emoji:"🛸", title:"Astronaut",
+    photo:"https://upload.wikimedia.org/wikipedia/commons/thumb/6/67/Guion_S._Bluford.jpg/300px-Guion_S._Bluford.jpg",
+    achievement:"First African American in space — flew aboard Space Shuttle Challenger in 1983. Completed four space shuttle missions and logged over 688 hours in space.",
+    funfact:"He was an Air Force fighter pilot who flew 144 combat missions in Vietnam before becoming an astronaut. He holds a PhD in aerospace engineering." },
+
+  { id:78, name:"Charles Bolden",              years:"1946–",     cat:"Space",       emoji:"🌍", title:"NASA Administrator & Astronaut",
+    achievement:"Flew four space shuttle missions (including the Hubble Space Telescope deployment) and served as NASA Administrator 2009–2017 — one of the most powerful posts in science.",
+    funfact:"He was rejected from the U.S. Naval Academy the first time — Senator Fritz Hollings of South Carolina recommended him the following year after he wrote a letter asking for help." },
+
+  { id:79, name:"Robert Henry Lawrence Jr.",   years:"1935–1967", cat:"Space",       emoji:"✈️", title:"Astronaut",
+    achievement:"First African American to be selected as an astronaut by any nation (1967) — chosen for the Air Force's Manned Orbiting Laboratory program.",
+    funfact:"He was killed in a training accident before he could go to space — but his selection broke barriers and paved the way for every Black astronaut who followed." },
+
+  { id:80, name:"Jeanette Epps",               years:"1970–",     cat:"Space",       emoji:"🚀", title:"Astronaut & NASA Scientist",
+    achievement:"First African American crew member of the International Space Station (ISS) Expedition 68 in 2022, becoming a historic milestone for Black representation in space exploration.",
+    funfact:"Before becoming an astronaut, she worked as a CIA technical intelligence officer — she's never stopped pushing boundaries." },
+
+  { id:81, name:"Leland Melvin",               years:"1964–",     cat:"Space",       emoji:"🏈", title:"Astronaut",
+    achievement:"Flew on two Space Shuttle missions to the International Space Station; one of the few people to have been both drafted by the NFL and traveled to space.",
+    funfact:"His NASA portrait with his two adopted dogs went viral — it was taken when his dogs ran onto the set of the official photo shoot and he decided to keep them in." },
+
+  { id:82, name:"Victor Glover",               years:"1976–",     cat:"Space",       emoji:"🌙", title:"Astronaut",
+    achievement:"Pilot of the Crew Dragon spacecraft on SpaceX's Demo-2 mission and first Black astronaut to live on the ISS long-term (2020–2021). Will fly the Artemis II mission around the Moon.",
+    funfact:"He was selected to be part of the Artemis program that will send humans back to the Moon — the first crewed lunar mission since Apollo 17 in 1972." },
+
+  { id:83, name:"Stephanie Wilson",            years:"1966–",     cat:"Space",       emoji:"🛰️", title:"Astronaut",
+    achievement:"Flew on three Space Shuttle missions and is one of the most experienced African American women astronauts; logged over 42 days in space.",
+    funfact:"She grew up in Pittsfield, Massachusetts, where the librarian was her biggest encourager — she later donated books to that library to inspire the next generation." },
+
+  { id:84, name:"Ron McNair",                  years:"1950–1986", cat:"Space",       emoji:"🎷", title:"Astronaut & Physicist",
+    photo:"https://upload.wikimedia.org/wikipedia/commons/thumb/6/68/Ron_McNair.jpg/300px-Ron_McNair.jpg",
+    achievement:"Flew on Space Shuttle Challenger in 1984 — the first Black person to use a laser in space. Died tragically in the 1986 Challenger explosion.",
+    funfact:"As a child in Lake City, SC, he tried to borrow books from a segregated library. The librarian called the police — but a physics teacher later taught him that no barrier was permanent." },
+
+  { id:85, name:"Aprille Ericsson",            years:"1963–",     cat:"Space",       emoji:"🌠", title:"NASA Aerospace Engineer",
+    achievement:"First woman and first African American to earn a PhD in engineering from Howard University; first Black woman to receive a PhD in engineering from NASA Goddard.",
+    funfact:"She has worked on 11 spacecraft missions and mentors hundreds of students through STEM outreach programs — spending as much time inspiring others as engineering satellites." },
+
+  // ── MORE PIONEERS (mixed) ──
+
+  { id:87, name:"Joseph Blair",                years:"1920–1976", cat:"Science",     emoji:"☢️", title:"Nuclear Physicist",
+    achievement:"Worked on nuclear physics research during the Cold War era, contributing to America's understanding of radioactive isotopes and nuclear reactor science.",
+    funfact:"He was one of only a handful of Black nuclear physicists working during the atomic age — a time when even government labs practiced segregation." },
+
+  { id:88, name:"Willie Hobbs Moore",          years:"1934–1994", cat:"Science",     emoji:"⚡", title:"Physicist",
+    achievement:"First African American woman to earn a PhD in physics in the United States (1972, University of Michigan); her work advanced spectroscopy and quantum mechanics.",
+    funfact:"She earned her degree nearly 100 years after physics PhDs were first awarded in the U.S. — a reminder of how long the barriers lasted." },
+
+  { id:89, name:"Walter E. Massey",            years:"1938–",     cat:"Science",     emoji:"🔭", title:"Physicist & NSF Director",
+    achievement:"Theoretical physicist who served as director of the National Science Foundation (1991–93) — overseeing the country's entire scientific research budget.",
+    funfact:"He grew up in Hattiesburg, Mississippi during segregation, attended Morehouse College at 16, and later became president of Morehouse — giving back to the institution that shaped him." },
+
+  { id:90, name:"Lonnie Johnson",              years:"1949–",     cat:"Engineering", emoji:"💦", title:"Inventor & Engineer",
+    achievement:"NASA and DARPA engineer who accidentally invented the Super Soaker in 1982 — the best-selling toy of the 1990s. He has over 120 patents.",
+    funfact:"He was testing a heat pump using water in his bathroom when the stream of water shot across the room and he thought — 'this would make a great water gun.'" },
+
+  { id:91, name:"Theodore Lawless",            years:"1892–1971", cat:"Medicine",    emoji:"🩺", title:"Dermatologist",
+    achievement:"World-renowned dermatologist who pioneered treatments for leprosy and syphilis; his Chicago clinic served thousands of patients regardless of their ability to pay.",
+    funfact:"He donated millions to Israeli charities and education, believing in human dignity across all cultures — a Jewish organization gave him the Humanitarian Award in 1954." },
+
+  { id:92, name:"John Brooks Slaughter",       years:"1934–",     cat:"Engineering", emoji:"📡", title:"Electrical Engineer & NSF Director",
+    achievement:"First African American to direct the National Science Foundation (1980–82); former chancellor of the University of Maryland and president of Occidental College.",
+    funfact:"He grew up in Topeka, Kansas — the same city at the center of the Brown v. Board of Education Supreme Court case that desegregated American schools." },
+
+  { id:93, name:"Shirley Ann Jackson",         years:"1946–",     cat:"Science",     emoji:"⚛️", title:"Physicist & University President",
+    photo:"https://upload.wikimedia.org/wikipedia/commons/thumb/b/b2/Shirley_Ann_Jackson.jpg/300px-Shirley_Ann_Jackson.jpg",
+    achievement:"First African American woman to earn a PhD from MIT (1973, in theoretical particle physics). President of Rensselaer Polytechnic Institute and former chair of the Nuclear Regulatory Commission.",
+    funfact:"Her research led to innovations including caller ID, call waiting, and fiber optic cables — the technologies undergirding modern telecommunications." },
+
+  { id:94, name:"Michael Croslin",             years:"1933–",     cat:"Tech",        emoji:"💓", title:"Inventor",
+    achievement:"Invented the first computerized blood pressure machine — transforming how doctors monitor patients and making blood pressure testing faster and more accurate.",
+    funfact:"His invention paved the way for automated blood pressure monitors found in every pharmacy and doctor's office around the world today." },
+
+  { id:95, name:"Yvonne Young Clark",          years:"1929–2019", cat:"Engineering", emoji:"⚙️", title:"Mechanical Engineer",
+    achievement:"First woman to receive a mechanical engineering degree from Howard University (1951) and first woman hired in engineering at GE's Louisville, KY plant.",
+    funfact:"She spent 40 years as an engineering professor at Tennessee State University, teaching and mentoring more than 40 years' worth of engineering students." },
+
+  { id:96, name:"Ulysses Grant Dailey",        years:"1885–1961", cat:"Medicine",    emoji:"🏥", title:"Surgeon",
+    achievement:"Pioneering surgeon and co-founder of the International College of Surgeons; helped establish surgical training standards and performed complex operations in an era of segregated hospitals.",
+    funfact:"He studied under Daniel Hale Williams — the first heart surgeon — and carried forward that legacy of excellence and breaking barriers in medicine." },
+
+  { id:97, name:"Mae Street Kidd",             years:"1904–1999", cat:"Math",        emoji:"🏛️", title:"Actuary & Legislator",
+    achievement:"First African American actuary in the insurance industry and a Kentucky state legislator who helped ratify the 13th, 14th, and 15th Constitutional Amendments for Kentucky.",
+    funfact:"Kentucky had never officially ratified those Civil War amendments — Mae Street Kidd's 1976 bill finally put Kentucky on the right side of history." },
+
+  { id:98, name:"Bebe Moore Campbell",         years:"1950–2006", cat:"Science",     emoji:"🧠", title:"Mental Health Advocate",
+    achievement:"Author and mental health advocate who co-founded NAMI's (National Alliance on Mental Illness) Urban Los Angeles chapter, bringing mental health awareness to Black communities.",
+    funfact:"July has been designated Bebe Moore Campbell National Minority Mental Health Awareness Month in her honor — passed by Congress in 2008." },
+
+  { id:99, name:"Hadiyah-Nicole Green",        years:"1981–",     cat:"Medicine",    emoji:"🎯", title:"Medical Physicist",
+    achievement:"Developed a method using laser-activated nanoparticles to target and kill cancer cells without harming healthy tissue — a potential breakthrough in cancer treatment.",
+    funfact:"She was the first Black woman to receive a PhD in physics from the University of Alabama at Birmingham, and won a $1.1 million grant to fund her cancer research." },
+
+  { id:100,name:"Ayanna Howard",               years:"1972–",     cat:"Tech",        emoji:"🤖", title:"Robotics Engineer & AI Pioneer",
+    achievement:"Developed AI-based robotics systems for NASA's Mars missions and created robots to help children with disabilities. Now Dean of Engineering at The Ohio State University.",
+    funfact:"Her socially assistive robots help children with autism and mobility challenges learn motor skills — combining cutting-edge AI with life-changing compassion." },
+
+  // ── MATH PIONEERS ──
+  { id:101, name:"Charles L. Reason",           years:"1818–1893", cat:"Math",        emoji:"📚", title:"Mathematician & Educator",
+    achievement:"One of the earliest African American college professors, teaching mathematics at New York Central College in the 1850s and inspiring students when very few Black scholars had access to higher education.",
+    funfact:"He was born free in New York City and became a leading abolitionist — using both his teaching and his activism to fight for freedom and equal rights at the same time." },
+
+  { id:102, name:"Dudley Weldon Woodard",        years:"1881–1965", cat:"Math",        emoji:"📐", title:"Mathematician & Department Builder",
+    achievement:"One of the first African Americans to earn a PhD in mathematics (University of Pennsylvania, 1928); built a strong graduate math program at Howard University that trained the next generation of Black mathematicians.",
+    funfact:"He spent decades building Howard University's math department into one of the strongest HBCUs had to offer — long before most universities would even admit Black students to their own math programs." },
+
+  { id:103, name:"William Schieffelin Claytor",  years:"1908–1967", cat:"Math",        emoji:"🔺", title:"Topologist",
+    achievement:"Third African American to earn a PhD in mathematics (University of Pennsylvania, 1933); made significant contributions to topology — the mathematical study of shapes and spaces that can be stretched and deformed.",
+    funfact:"Despite being a brilliant mathematician, no university would hire him as a professor for years because of racism. He eventually taught at Howard University where he inspired many future mathematicians." },
+
+  { id:104, name:"Vivienne Malone-Mayes",        years:"1932–1995", cat:"Math",        emoji:"✏️", title:"Mathematician",
+    achievement:"Earned her PhD in mathematics from the University of Texas in 1966 — despite UT having previously refused to admit her as a student because she was Black. Spent her career as a beloved professor at Baylor University.",
+    funfact:"She was rejected from UT Austin's grad program for her race, attended Fisk University instead, then returned to UT and earned her doctorate there — proving the power of sheer persistence." },
+
+  { id:105, name:"Gloria Ford Gilmer",           years:"1928–2020", cat:"Math",        emoji:"🎨", title:"Ethnomathematician",
+    achievement:"Pioneered ethnomathematics — the study of mathematics embedded in everyday culture, art, and crafts. Her work helped make math more relevant and accessible for students from all backgrounds.",
+    funfact:"She showed that hairstyles, quilts, and traditional crafts contain deep mathematical patterns — helping students see that math isn't just in textbooks but woven into the world all around them." },
+
+  { id:106, name:"Freeman Hrabowski",            years:"1950–2022", cat:"Math",        emoji:"🏛️", title:"Mathematician & University President",
+    achievement:"As president of UMBC for over 25 years, transformed it into one of the top universities in America for producing Black scientists and engineers — more than almost any other institution in the country.",
+    funfact:"At age 12, he marched in the Birmingham Children's Crusade with Martin Luther King Jr. and was arrested and jailed — an experience that fueled his lifelong commitment to education as liberation." },
+
+  { id:107, name:"Talitha Washington",           years:"1974–",     cat:"Math",        emoji:"📊", title:"Applied Mathematician",
+    achievement:"Applied mathematician and founding director of the Atlanta University Center Consortium's Data Science Initiative — dramatically expanding STEM and data science opportunities for students at HBCUs.",
+    funfact:"She has dedicated her career not just to doing math, but to ensuring Black students have access to the high-paying, high-impact careers in data science and computing that depend on mathematical skills." },
+
+  // ── PHYSICS PIONEERS ──
+  { id:108, name:"Elmer Imes",                   years:"1883–1941", cat:"Science",     emoji:"💡", title:"Infrared Spectroscopist",
+    achievement:"Used infrared light to make the first precise measurements of the distances between atoms in molecules — work that was pivotal to the development of quantum mechanics and our understanding of matter.",
+    funfact:"He was the second African American to earn a PhD in physics (University of Michigan, 1918). His research was published in leading physics journals of the day, yet he remains largely unknown today." },
+
+  { id:109, name:"Carolyn Parker",               years:"1917–1966", cat:"Science",     emoji:"☢️", title:"Nuclear Physicist",
+    achievement:"Worked on the Manhattan Project and the Dayton Project researching nuclear materials — one of a tiny number of Black women physicists working in America's atomic energy program during WWII.",
+    funfact:"She died at 48 from cancer — believed caused by radiation exposure from her atomic research. Her sacrifice helped build America's nuclear science program, but her name is rarely found in history books." },
+
+  { id:110, name:"Warren Henry",                 years:"1909–2001", cat:"Science",     emoji:"🧲", title:"Physicist",
+    achievement:"Made important contributions to the study of magnetism at extremely cold temperatures (cryogenics) and worked on radar technology during WWII. Spent decades teaching and mentoring at Howard University.",
+    funfact:"He earned his PhD from the University of Chicago in 1941 and worked on radar systems that helped guide Allied forces during World War II — a contribution rarely discussed in history books." },
+
+  { id:111, name:"George Carruthers",            years:"1939–2020", cat:"Science",     emoji:"🌙", title:"Astrophysicist & Inventor",
+    achievement:"Invented the Far Ultraviolet Camera/Spectrograph deployed on the Moon during Apollo 16 in 1972 — the first Moon-based observatory, capturing images of Earth's atmosphere and deep space in ultraviolet light.",
+    funfact:"He built his first telescope at age 10 from cardboard tubes and mail-order lenses. His Moon camera gave scientists their first ultraviolet view of Earth from space — revealing features invisible to the naked eye." },
+
+  { id:112, name:"Earl Shaw",                    years:"1937–2015", cat:"Science",     emoji:"🔦", title:"Laser Physicist",
+    achievement:"Helped invent a tunable spin-flip Raman laser — a device that could produce different wavelengths of light on demand — advancing laser technology for scientific research and measurement.",
+    funfact:"He later became dean of the School of Science at New Jersey Institute of Technology, dedicating his career not only to research but to opening doors for minority students in science." },
+
+  { id:113, name:"Sylvester James Gates Jr.",    years:"1950–",     cat:"Science",     emoji:"🌀", title:"Theoretical Physicist",
+    achievement:"World-renowned for his work on supersymmetry and string theory — the deep mathematical ideas that may explain the fundamental nature of the universe. One of the first Black physicists to hold a named professorship at a major research university.",
+    funfact:"He discovered mysterious error-correcting codes woven into the equations of string theory — the same mathematics used in computer browsers — leading him to wonder if reality itself might be a kind of simulation." },
+
+  { id:114, name:"Hakeem Oluseyi",               years:"1971–",     cat:"Science",     emoji:"⭐", title:"Astrophysicist & Educator",
+    achievement:"Astrophysicist who has worked with NASA on space telescope research and is a beloved science communicator bringing cutting-edge astronomy to public audiences worldwide through TV and public speaking.",
+    funfact:"He grew up homeless in some of the roughest parts of New Orleans, taught himself calculus in 9th grade, and eventually earned a PhD in physics from Stanford. His memoir 'A Quantum Life' is as inspiring as any rocket launch." },
+
+  { id:115, name:"Stephon Alexander",            years:"1971–",     cat:"Science",     emoji:"🎵", title:"Cosmologist",
+    achievement:"Theoretical physicist and cosmologist who studies the origin of the universe and has proposed innovative ideas connecting the physics of the early cosmos to why matter exists at all.",
+    funfact:"He's also a jazz saxophonist who argues that jazz and physics share deep mathematical structures — he wrote 'The Jazz of Physics' exploring how musical improvisation and the cosmos are mysteriously connected." },
+
+  { id:116, name:"Chanda Prescod-Weinstein",     years:"1982–",     cat:"Science",     emoji:"🌌", title:"Dark Matter Physicist",
+    achievement:"Theoretical cosmologist searching for axions — hypothetical particles that may make up the mysterious 'dark matter' holding galaxies together — and a leading voice for equity and inclusion in physics.",
+    funfact:"She is one of fewer than 100 Black women to have ever earned a physics PhD in U.S. history. She wrote 'The Disordered Cosmos' — weaving physics, identity, and justice into one powerful story." },
+
+  { id:117, name:"Jami Valentine Miller",        years:"1977–",     cat:"Science",     emoji:"📋", title:"Physicist & Diversity Advocate",
+    achievement:"Physicist and founder of a database tracking every Black woman who has earned a physics PhD in the United States — ensuring their achievements are recognized and counted for history.",
+    funfact:"She began her project after realizing no one knew exactly how many Black women had earned physics doctorates. The answer turned out to be fewer than 100 in all of U.S. history — a shocking reminder of how many barriers remain." },
+
+  { id:118, name:"Sekazi Mtingwa",               years:"1949–",     cat:"Science",     emoji:"💥", title:"Particle Physicist",
+    achievement:"Made key contributions to understanding intrabeam scattering in particle accelerators — vital for designing the giant machines that help scientists study the fundamental building blocks of matter.",
+    funfact:"He co-founded the African Physical Society and has worked tirelessly to build physics capacity across the African continent, believing that science must be global and inclusive to truly advance knowledge." },
+
+  { id:119, name:"Beth Brown",                   years:"1969–2008", cat:"Science",     emoji:"🌠", title:"Astrophysicist",
+    achievement:"NASA astrophysicist who studied elliptical galaxies and X-ray emissions from deep space; worked at NASA Goddard Space Flight Center and was a passionate advocate for science education.",
+    funfact:"She was the first African American woman to earn a PhD in astrophysics from the University of Michigan. Her career was cut short when she died at 39, but her research and mentoring legacy continue to inspire." },
+
+  // ── CHEMISTRY PIONEERS ──
+  { id:120, name:"St. Elmo Brady",               years:"1884–1966", cat:"Science",     emoji:"⚗️", title:"First African American Chemistry PhD",
+    achievement:"First African American to earn a PhD in chemistry in the United States (University of Illinois, 1916); spent his career building chemistry departments at Tuskegee, Fisk, and Howard universities.",
+    funfact:"He returned to teach at HBCUs because those were the schools serving Black students. His decision to build up HBCU science departments shaped generations of Black chemists who followed in his footsteps." },
+
+  { id:121, name:"Alice Ball",                   years:"1892–1916", cat:"Science",     emoji:"🌺", title:"Chemist & Medical Innovator",
+    photo:"https://upload.wikimedia.org/wikipedia/commons/thumb/5/5c/Alice_Ball.jpg/300px-Alice_Ball.jpg",
+    achievement:"Developed the first effective injectable treatment for leprosy using extracted compounds from the chaulmoogra plant — a major medical breakthrough that helped patients when no other treatment existed.",
+    funfact:"She died at 24, and a male colleague published her research without crediting her. It took nearly 100 years for the University of Hawaii to properly honor her — but her contribution to medicine was real from day one." },
+
+  { id:122, name:"Marie Maynard Daly",           years:"1921–2003", cat:"Science",     emoji:"🫀", title:"First Black Woman Chemistry PhD in the U.S.",
+    achievement:"First African American woman to earn a PhD in chemistry in the United States (Columbia University, 1947); conducted research on how proteins are made, how cholesterol affects the heart, and how the body processes nutrients.",
+    funfact:"She established a scholarship at Queens College in honor of her father — whose dream of attending college had been cut short by poverty — so other Black students could reach their scientific dreams." },
+
+  { id:123, name:"Mary Elliott Hill",            years:"1907–1969", cat:"Science",     emoji:"🔬", title:"Analytical Chemist",
+    achievement:"Pioneering analytical chemist known for her meticulous laboratory techniques and contributions to chemistry education at Kentucky State University, where she inspired generations of students.",
+    funfact:"She and her husband were a rare scientific couple who both dedicated their careers to chemistry at HBCUs during an era when Black scientists were shut out of most mainstream research institutions." },
+
+  { id:124, name:"Samuel Massie",                years:"1919–2005", cat:"Science",     emoji:"🎖️", title:"Chemist",
+    achievement:"First Black professor at the U.S. Naval Academy (1966); spent decades making chemistry education accessible and conducted research related to drugs that could treat HIV/AIDS.",
+    funfact:"He taught at the Naval Academy for 27 years and was so beloved that students voted him Teacher of the Year three times. He broke a color barrier that had stood for 120 years." },
+
+  { id:125, name:"Henry Aaron Hill",             years:"1915–1979", cat:"Science",     emoji:"🏆", title:"Chemist & ACS President",
+    achievement:"Prominent industrial chemist who worked on polymers and flame retardants; first Black president of the American Chemical Society in 1977 — leading the nation's largest scientific society.",
+    funfact:"He was rejected from MIT's PhD program because of his race, got his doctorate elsewhere, and decades later became president of the nation's top chemistry organization — a full circle moment of justice." },
+
+  { id:126, name:"Moddie Taylor",                years:"1912–1976", cat:"Science",     emoji:"⚛️", title:"Manhattan Project Chemist",
+    achievement:"One of only a handful of Black scientists who worked on the top-secret Manhattan Project during WWII, contributing to the research that led to the atomic age.",
+    funfact:"His work on the Manhattan Project was so classified that even his family didn't fully know what he was doing for years. He later taught chemistry at Howard University for decades." },
+
+  { id:127, name:"Lloyd Quarterman",             years:"1918–1982", cat:"Science",     emoji:"🧪", title:"Fluorine Chemist",
+    achievement:"Manhattan Project scientist who specialized in fluorine chemistry — one of the most reactive and dangerous elements — and helped develop materials needed for nuclear science.",
+    funfact:"He was one of six African American scientists who signed a letter to President Truman about the ethics of using the atomic bomb — showing that Black scientists were not just doing the science but questioning its moral implications too." },
+
+  { id:128, name:"Bettye Washington Greene",     years:"1935–",     cat:"Science",     emoji:"🔭", title:"Research Chemist",
+    achievement:"First African American woman PhD chemist to work as a research scientist at The Dow Chemical Company — a groundbreaking achievement in industrial chemistry that broke two barriers at once: race and gender.",
+    funfact:"Her decades of polymer and coating research at Dow took place in an industry that had almost no women scientists and virtually no Black scientists — she proved that excellence knows no color or gender." },
+
+  { id:129, name:"Gloria Long Anderson",         years:"1938–",     cat:"Science",     emoji:"🌡️", title:"Fluorine Chemist",
+    achievement:"Expert in fluorine-containing compounds with research spanning nuclear and space applications; spent her career at Morris Brown College, one of Atlanta's HBCUs, mentoring thousands of students.",
+    funfact:"Her fluorine chemistry research contributed to solid-fuel booster rocket technology during the space race — she helped develop the rockets that launched Americans into orbit." },
+
+  { id:130, name:"Reatha Clark King",            years:"1938–",     cat:"Science",     emoji:"🔥", title:"Thermochemist & Executive",
+    achievement:"Made precise measurements of the energy released in chemical reactions, then went on to lead Metropolitan State University and the General Mills Foundation — combining scientific excellence with community leadership.",
+    funfact:"She grew up in poverty in rural Georgia, picking cotton and working as a maid — then earned a PhD in chemistry from the University of Chicago and rose to lead major institutions. A true story of transformation through education." },
+
+  // ── BIOLOGY & GENETICS PIONEERS ──
+  { id:131, name:"Ruth Ella Moore",              years:"1903–1994", cat:"Science",     emoji:"🦠", title:"Bacteriologist",
+    achievement:"First African American woman to earn a PhD in a natural science in the United States (Ohio State University, 1933); her research on tuberculosis and blood types advanced medical microbiology.",
+    funfact:"For most of her career, she was head of bacteriology at Howard University's medical school — training the Black doctors and scientists who would go on to serve Black communities across America." },
+
+  { id:132, name:"Margaret Collins",             years:"1922–1996", cat:"Science",     emoji:"🪲", title:"Entomologist",
+    achievement:"Expert in termite biology — earning the nickname 'the Termite Lady' — whose research overturned previous assumptions about termite behavior and advanced the field of entomology.",
+    funfact:"She was so dedicated that she died while doing field research in the Cayman Islands at age 73, still studying the insects she'd devoted her life to understanding. Science to the very end." },
+
+  { id:133, name:"Jewel Plummer Cobb",           years:"1924–2017", cat:"Science",     emoji:"🔬", title:"Cell Biologist",
+    achievement:"Pioneering research on the biology of skin cells and how they respond to cancer — her work helped advance early understanding of chemotherapy's effects on melanoma and other cancers.",
+    funfact:"She became president of California State University, Fullerton, and spent her leadership years making sure minority students in STEM had the scholarships and mentorship they needed to succeed." },
+
+  { id:134, name:"Joan Murrell Owens",           years:"1933–2011", cat:"Science",     emoji:"🪸", title:"Marine Biologist",
+    achievement:"Discovered new species of deep-sea coral — one of the few Black marine biologists of her era whose meticulous fieldwork expanded our knowledge of coral reef ecosystems.",
+    funfact:"Guidance counselors told her as a child to aim for a 'practical' career instead of science. She went on to discover entirely new species of coral — nature's way of proving counselors wrong." },
+
+  { id:135, name:"Harold Amos",                  years:"1918–2003", cat:"Medicine",    emoji:"🧬", title:"Microbiologist",
+    achievement:"First African American to chair a department at Harvard Medical School (microbiology); his research on viral diseases and his mentorship of students shaped a generation of American biomedical scientists.",
+    funfact:"He served in the U.S. Army during WWII and was stationed in France. After the war, he returned to Harvard and eventually led a department — becoming one of the most respected figures in American medicine." },
+
+  { id:136, name:"Mary Styles Harris",           years:"1949–",     cat:"Science",     emoji:"📡", title:"Geneticist & Science Communicator",
+    achievement:"Geneticist whose research on sickle cell disease and cancer advanced understanding of these conditions; also brought science to the public through TV and radio programs — making genetics accessible to everyone.",
+    funfact:"She was one of the first geneticists to bring science communication to Black communities through television, believing that everyone deserves to understand the science that affects their health." },
+
+  { id:137, name:"Georgia Dunston",              years:"1944–",     cat:"Science",     emoji:"🧬", title:"Human Genomics Pioneer",
+    achievement:"Founded the National Human Genome Center at Howard University — one of the first centers specifically studying the genetic diversity of people of African descent, filling a critical gap in genomics research.",
+    funfact:"Her work revealed that most medical genetics research had been done only on people of European ancestry — missing health risks specific to African Americans. She set out to fix that dangerous gap." },
+
+  { id:138, name:"Rick Kittles",                 years:"1966–",     cat:"Science",     emoji:"🌍", title:"Ancestry Geneticist",
+    achievement:"Co-founded African Ancestry Inc., using DNA science to help people of African descent trace their specific ethnic and geographic origins — reconnecting millions to their heritage lost through slavery.",
+    funfact:"He's helped thousands of people discover which part of Africa their ancestors came from — a deeply emotional journey for many African Americans whose family histories were erased by the slave trade." },
+
+  // ── MEDICINE (NEW) ──
+  { id:139, name:"William Hinton",               years:"1883–1959", cat:"Medicine",    emoji:"🩺", title:"Medical Researcher",
+    achievement:"Developed the Hinton Test — one of the most reliable blood tests for diagnosing syphilis — which became the standard test used by public health departments across America and saved countless lives.",
+    funfact:"Despite his scientific excellence, Harvard denied him a medical professorship for years because of his race — finally making him a clinical professor in 1949, when he was 66 years old. Justice came late, but it came." },
+
+  { id:140, name:"Justina Ford",                 years:"1871–1952", cat:"Medicine",    emoji:"👶", title:"Physician",
+    achievement:"Denver's first licensed Black woman doctor; practiced medicine for over 50 years, delivering an estimated 7,000 babies and serving patients of all races at a time when hospitals would not admit Black doctors or patients.",
+    funfact:"She worked out of her own home when hospitals refused to grant her privileges. Her patients were so grateful they nicknamed her 'The Lady Doctor' and 'Baby Doctor Ford' throughout the Denver community." },
+
+  { id:141, name:"May Edward Chinn",             years:"1896–1980", cat:"Medicine",    emoji:"🎵", title:"Physician & Cancer Researcher",
+    achievement:"Early pioneer in cancer detection using biopsy techniques; worked in Harlem for decades serving patients who had no other access to medical care, while conducting research that advanced cancer diagnosis.",
+    funfact:"As a child she played piano so well she performed at Carnegie Hall. She later used her scientific talents to fight cancer — two very different kinds of performance, both delivered with excellence." },
+
+  { id:142, name:"W. Montague Cobb",             years:"1904–1990", cat:"Medicine",    emoji:"🦴", title:"Anatomist & Anthropologist",
+    achievement:"Distinguished anatomist at Howard University for 40+ years; his research definitively proved that racial differences in bone structure are not real — debunking scientific racism used to justify segregation.",
+    funfact:"He studied the skeletons of famous athletes and proved they had no biological advantage tied to race — striking a scientific blow against the myths that were being used to keep Black Americans down." },
+
+  { id:143, name:"Leonidas Berry",               years:"1902–1995", cat:"Medicine",    emoji:"🔍", title:"Gastroenterologist",
+    achievement:"Pioneered clinical use of the gastroscope — a tiny instrument that lets doctors look inside the stomach — bringing this specialized procedure to Black patients in Chicago who previously had no access to such care.",
+    funfact:"He was also a civil rights activist who fought to desegregate Chicago hospitals, understanding that improving healthcare required fighting racism in medicine's institutions, not just in its techniques." },
+
+  { id:144, name:"Helen Octavia Dickens",        years:"1909–2001", cat:"Medicine",    emoji:"🏅", title:"Surgeon",
+    achievement:"First African American woman admitted to the American College of Surgeons (1950); a pioneer in obstetrics and gynecology who fought for reproductive health rights for low-income Black women.",
+    funfact:"She created one of the first teen pregnancy prevention programs in the country — recognizing decades before most that prevention required education, healthcare, and opportunity working together." },
+
+  { id:145, name:"Angella Ferguson",             years:"1925–2018", cat:"Medicine",    emoji:"🌙", title:"Pediatrician",
+    achievement:"Pioneering researcher in sickle cell disease at Children's National Medical Center in Washington D.C.; spent decades fighting for better understanding and treatment of a disease that disproportionately affects Black children.",
+    funfact:"She devoted her career to sickle cell disease at a time when the government invested very little in conditions mainly affecting Black Americans. She pushed for change — and slowly it came." },
+
+  { id:146, name:"Roland Scott",                 years:"1909–2002", cat:"Medicine",    emoji:"💊", title:"Pediatrician & Sickle Cell Advocate",
+    achievement:"Spent decades as one of the nation's leading advocates for sickle cell disease research and treatment — training physicians and pushing for national programs that finally addressed this neglected condition.",
+    funfact:"Working alongside Angella Ferguson at Howard University, together they helped turn sickle cell disease from a neglected condition into a national health priority, eventually leading to the National Sickle Cell Anemia Control Act." },
+
+  { id:147, name:"Levi Watkins Jr.",             years:"1944–2015", cat:"Medicine",    emoji:"⚡", title:"Cardiac Surgeon",
+    achievement:"First surgeon in the world to implant an automatic defibrillator inside a human heart (1980) — a device that shocks the heart back into rhythm and has since saved hundreds of thousands of lives worldwide.",
+    funfact:"He was the first Black student to graduate from Vanderbilt University School of Medicine. His defibrillator invention now keeps millions of hearts beating — yet most people have never heard his name." },
+
+  { id:148, name:"Marilyn Hughes Gaston",        years:"1939–",     cat:"Medicine",    emoji:"🌹", title:"Pediatrician",
+    achievement:"Her clinical trials proved that penicillin could dramatically reduce life-threatening infections in babies with sickle cell disease — changing pediatric treatment guidelines across the country.",
+    funfact:"She grew up inspired by a Black woman doctor in her Cincinnati neighborhood and dedicated her career to proving that with the right treatment, children with sickle cell disease could live full, healthy lives." },
+
+  { id:149, name:"LaSalle Leffall Jr.",          years:"1930–2019", cat:"Medicine",    emoji:"🏥", title:"Oncologic Surgeon",
+    achievement:"Respected cancer surgeon and chairman of surgery at Howard University; chaired the President's Cancer Panel under three presidents, shaping national cancer policy and raising awareness about cancer in Black communities.",
+    funfact:"He was among the first surgeons to document that Black Americans had significantly higher cancer mortality rates than white Americans — using data to demand health equity decades before it was widely discussed." },
+
+  { id:150, name:"Augustus White III",           years:"1936–",     cat:"Medicine",    emoji:"🦴", title:"Orthopedic Surgeon",
+    achievement:"Pioneer in spine surgery and biomechanics; his research on how the spine moves and heals changed surgical techniques worldwide and benefited millions of patients with back pain.",
+    funfact:"He was the first African American chief resident in orthopedic surgery at Massachusetts General Hospital. His textbook on spinal anatomy is still a standard reference for surgeons around the world today." },
+
+  { id:151, name:"Edith Irby Jones",             years:"1927–2013", cat:"Medicine",    emoji:"🌸", title:"Physician",
+    achievement:"First African American student admitted to the University of Arkansas Medical School (1948) — breaking the color barrier at a Southern medical school in one of the most significant integration milestones in medical education.",
+    funfact:"She had to eat meals separately and attend classes in segregated spaces — but she graduated and became a doctor who served patients for decades, and later became president of the National Medical Association." },
+
+  { id:152, name:"Claudia Thomas",               years:"1943–",     cat:"Medicine",    emoji:"🏋️", title:"Orthopedic Surgeon",
+    achievement:"First African American woman to practice orthopedic surgery in the United States — breaking both a racial and gender barrier in one of medicine's most physically demanding specialties.",
+    funfact:"When she applied for orthopedic surgery training, she was told the program 'didn't take women.' She found one that did, mastered the craft, and spent her career proving she absolutely belonged there." },
+
+  { id:153, name:"Velma Scantlebury",            years:"1955–",     cat:"Medicine",    emoji:"🫘", title:"Transplant Surgeon",
+    achievement:"First African American woman transplant surgeon in the United States; has performed hundreds of kidney transplants and advocates for diversity in surgery and for increasing organ donation in Black communities.",
+    funfact:"She grew up in Barbados where healthcare access was limited — which drove her to medicine. She has since worked to increase organ donation awareness in Black communities, where donation rates have historically been lower." },
+
+  { id:154, name:"Keith Black",                  years:"1957–",     cat:"Medicine",    emoji:"🧠", title:"Neurosurgeon",
+    achievement:"One of the world's leading neurosurgeons specializing in brain tumors; has performed over 5,000 brain surgeries and researched ways to break through the blood-brain barrier to deliver cancer treatments directly to tumors.",
+    funfact:"He grew up in rural Alabama and showed such aptitude for science that his high school let him do independent biology research. He went on to chair neurosurgery at Cedars-Sinai Medical Center in Los Angeles." },
+
+  { id:155, name:"Vivian Pinn",                  years:"1941–",     cat:"Medicine",    emoji:"♀️", title:"Pathologist & Women's Health Advocate",
+    achievement:"First director of the Office of Research on Women's Health at the National Institutes of Health — championing the inclusion of women in clinical research at a time when most medical studies enrolled only men.",
+    funfact:"Before she took the NIH role, women were routinely excluded from medical research — meaning treatments tested only on men were then applied to women. She fought to change this, improving medicine for everyone." },
+
+  { id:156, name:"Griffin Rodgers",              years:"1953–",     cat:"Medicine",    emoji:"💉", title:"Hematologist",
+    achievement:"Led research identifying hydroxyurea as an effective treatment for sickle cell disease — the first drug proven to reduce painful crises and hospitalizations, changing the lives of hundreds of thousands of patients.",
+    funfact:"He served as director of the National Institute of Diabetes and Digestive and Kidney Diseases at NIH. The treatment he helped validate is now considered the cornerstone of sickle cell disease management worldwide." },
+
+  // ── ENGINEERING (NEW) ──
+  { id:157, name:"Sarah Goode",                  years:"1850–1905", cat:"Engineering", emoji:"🛏️", title:"Inventor",
+    achievement:"Received a U.S. patent in 1885 for a fold-up bed cabinet — making her one of the first African American women to receive a U.S. patent. Her space-saving design was perfect for small urban homes.",
+    funfact:"She had been born into slavery and later opened a furniture store in Chicago. Her invention — a cabinet that converts into a full bed — was essentially the Murphy bed concept, created by a freed slave decades earlier." },
+
+  { id:158, name:"Sarah Boone",                  years:"1832–1904", cat:"Engineering", emoji:"👔", title:"Inventor",
+    achievement:"Received a U.S. patent in 1892 for an improved ironing board with a curved, narrow design that made ironing sleeves and curved garments much easier — a practical innovation used in homes for generations.",
+    funfact:"She was born into slavery in North Carolina and became one of the few African American women patent holders of the 19th century. Her ironing board design influenced the modern boards used in homes today." },
+
+  { id:159, name:"Philip Downing",               years:"1857–1934", cat:"Engineering", emoji:"📬", title:"Inventor",
+    achievement:"Invented the street letter drop box — a hinged door mailbox that kept letters dry in rain and snow — and an electrical switch board, holding several important patents in the late 1800s.",
+    funfact:"The design principle of his street mailbox — a protected hinged drop slot — is still used in U.S. mail collection boxes today. Every time you drop a letter in a mailbox, you're using his idea." },
+
+  { id:160, name:"David Crosthwait",             years:"1898–1975", cat:"Engineering", emoji:"🌡️", title:"HVAC Engineering Pioneer",
+    achievement:"Held over 39 patents related to heating, ventilation, and air conditioning systems; designed the HVAC system for New York City's famous Rockefeller Center — one of the great engineering achievements of the era.",
+    funfact:"The heating system he designed for Rockefeller Center is still considered a masterpiece of engineering. Yet his name is almost never mentioned in engineering histories — he kept millions comfortable in anonymity." },
+
+  { id:161, name:"Ozzie Williams",               years:"1921–1994", cat:"Engineering", emoji:"🚀", title:"Aerospace Engineer",
+    achievement:"One of the first Black aerospace engineers at Grumman Aircraft; designed small thruster rockets used to orient spacecraft in orbit — precision engineering that made space navigation possible.",
+    funfact:"When he was hired as an aerospace engineer in the 1950s, most aerospace companies wouldn't hire Black engineers at all. His technical excellence opened a door that had been firmly shut to people who looked like him." },
+
+  { id:162, name:"Howard P. Grant",              years:"1888–1960", cat:"Engineering", emoji:"🌉", title:"Civil Engineer",
+    achievement:"First African American civil engineer hired by the City and County of San Francisco — breaking a significant employment barrier in a city that would go on to become a center of innovation.",
+    funfact:"He broke the color barrier in San Francisco city government at a time when most civil service positions were closed to Black applicants. His career helped build some of San Francisco's most enduring infrastructure." },
+
+  { id:163, name:"George Edward Alcorn Jr.",     years:"1940–",     cat:"Engineering", emoji:"🔭", title:"Inventor & Aerospace Engineer",
+    achievement:"Invented an imaging X-ray spectrometer — a device that identifies the chemical composition of materials by analyzing the X-rays they emit — crucial for studying planets and stars from spacecraft.",
+    funfact:"He holds over 8 patents and was inducted into the National Inventors Hall of Fame. His X-ray instrument has been used on space missions to analyze everything from asteroid surfaces to the Sun's corona." },
+
+  { id:164, name:"Robert Shurney",               years:"1921–2007", cat:"Engineering", emoji:"🌕", title:"NASA Design Engineer",
+    achievement:"NASA engineer who designed the tires for the Lunar Rover — the dune buggy that astronauts drove on the Moon during Apollo missions — and engineered life support and equipment systems for the Apollo program.",
+    funfact:"He worked at NASA's Marshall Space Flight Center for 32 years. The tires he designed had to survive the Moon's extreme vacuum and wild temperature swings — a challenge no engineer had ever faced before." },
+
+  { id:165, name:"Rufus Stokes",                 years:"1924–1986", cat:"Engineering", emoji:"💨", title:"Inventor & Air Quality Pioneer",
+    achievement:"Invented the Air Purification Device — a filter system to reduce smoke and pollution from factory chimneys and furnaces — contributing to the early environmental movement before the EPA even existed.",
+    funfact:"Motivated by the dirty air in his Chicago neighborhood, he used his mechanical skills to design a device that cleaned industrial exhaust. He received two patents and was a true environmental pioneer." },
+
+  { id:166, name:"Christine Darden",             years:"1942–",     cat:"Engineering", emoji:"✈️", title:"Aerospace Engineer & Sonic Boom Expert",
+    photo:"https://upload.wikimedia.org/wikipedia/commons/thumb/8/81/Christine_Darden_in_2019.jpg/300px-Christine_Darden_in_2019.jpg",
+    achievement:"NASA mathematician and aerospace engineer who spent her career studying sonic booms — the thunderous sound made when aircraft break the sound barrier — and helped design quieter supersonic aircraft.",
+    funfact:"She worked at NASA Langley for 40 years and is one of the 'Hidden Figures.' She was the first Black woman at NASA Langley promoted to the Senior Executive Service — recognition long overdue." },
+
+  { id:167, name:"Wanda Austin",                 years:"1954–",     cat:"Engineering", emoji:"🛰️", title:"Systems Engineer & Space Leader",
+    achievement:"Aerospace engineer and CEO of The Aerospace Corporation (2008–2016) — leading a major nonprofit that advises the U.S. government on space systems and national security satellites.",
+    funfact:"She grew up in New York City, earned a scholarship to study math, and eventually led an organization of thousands of scientists and engineers who work on America's most sensitive space and national security programs." },
+
+  { id:168, name:"Robert H. Bragg",              years:"1919–2009", cat:"Engineering", emoji:"💎", title:"Materials Scientist",
+    achievement:"Pioneering materials scientist who studied the structure of carbon and graphite — contributing to research on advanced materials used in nuclear reactors and high-strength structural applications.",
+    funfact:"He was one of the first Black scientists to hold a research faculty position at a major public university (UC Berkeley). His research on carbon structures laid groundwork for materials science advances that came decades later." },
+
+  { id:169, name:"Frank Greene",                 years:"1938–2009", cat:"Tech",        emoji:"💾", title:"Computer Engineer & Silicon Valley Pioneer",
+    achievement:"Pioneered the development of high-speed computer memory chips in the 1960s–70s; co-founded several technology companies in Silicon Valley and was a major figure in the semiconductor industry.",
+    funfact:"He was sometimes called a 'godfather of Silicon Valley' and was one of the few Black executives in the tech industry during its early boom years — using his position to mentor and invest in other Black entrepreneurs." },
+
+  { id:170, name:"Marc Hannah",                  years:"1956–",     cat:"Tech",        emoji:"🎬", title:"Computer Graphics Pioneer",
+    achievement:"Co-founded Silicon Graphics Inc. (SGI) and designed the visual computing systems used to create the groundbreaking computer graphics in films like Jurassic Park, The Abyss, and Terminator 2.",
+    funfact:"The dinosaurs in Jurassic Park were brought to life using SGI workstations that Marc Hannah helped design. His graphics chips changed movies, TV, and games forever — and most people have never heard his name." },
+
+  { id:171, name:"John Henry Thompson",          years:"1959–",     cat:"Tech",        emoji:"🎮", title:"Creator of Lingo Programming Language",
+    achievement:"Created the Lingo programming language and made key contributions to Macromedia Director — the software that powered most web animation, CD-ROM games, and multimedia in the 1990s.",
+    funfact:"His Lingo programming language let millions of people create interactive media without being professional programmers. Before Flash existed, Director and Lingo were how the internet got animated." },
+
+  { id:172, name:"Jesse Russell",                years:"1948–",     cat:"Tech",        emoji:"📶", title:"Digital Cellular Technology Pioneer",
+    achievement:"Invented key technologies enabling digital cellular telephone networks — making reliable cell phone calls possible and helping transform mobile phones from expensive novelties into tools for everyone.",
+    funfact:"He holds over 100 patents and was inducted into the National Inventors Hall of Fame in 2022. Every time you make a cell phone call or send a text, you're using technologies that Jesse Russell helped pioneer." },
+
+  { id:173, name:"Lisa Gelobter",                years:"1971–",     cat:"Tech",        emoji:"🌐", title:"Web Technology Pioneer",
+    achievement:"Was instrumental in developing Shockwave — a key technology behind web animation — and contributed to early online video delivery; later became Chief Digital Service Officer for the U.S. Department of Education.",
+    funfact:"The animated GIFs you see on the internet today trace their roots partly to her early work on web animation technology. She went from helping build the visual internet to using technology to improve education for all Americans." },
+
+  { id:174, name:"Juan Gilbert",                 years:"1971–",     cat:"Tech",        emoji:"🗳️", title:"Computer Scientist & HCI Expert",
+    achievement:"Created Prime III — a multimodal voting system that helps people with disabilities vote independently — spending his career making technology more accessible, fair, and usable for everyone.",
+    funfact:"His voting technology uses voice, touch, and visual interfaces so people who are blind, have limited mobility, or don't read English well can still vote privately and independently. Technology making democracy more equal." },
+
+  // ── EARTH & OCEAN SCIENCE ──
+  { id:175, name:"Marguerite Thomas Williams",   years:"1895–1991", cat:"Science",     emoji:"🪨", title:"Geologist",
+    achievement:"First African American to earn a PhD in geology in the United States (Catholic University, 1942); spent her career at Miner Teachers College in Washington D.C. making geology accessible to Black students.",
+    funfact:"She earned her geology PhD in 1942 — an almost unimaginable achievement for a Black woman at that time. Her dissertation mapped the evolution of Seneca Creek in Maryland through painstaking field work." },
+
+  { id:176, name:"Evan B. Forde",                years:"1952–",     cat:"Science",     emoji:"🌊", title:"Oceanographer",
+    achievement:"First African American oceanographer to participate in deep-sea submersible dives — descending thousands of feet into the ocean to study underwater geology and marine ecosystems.",
+    funfact:"He made his first deep-sea dive before most people had even heard of deep-sea exploration as a career. He has spent his career at NOAA as a passionate advocate for bringing ocean science to young people of color." },
+
+  { id:177, name:"Dawn Wright",                  years:"1961–",     cat:"Science",     emoji:"🗺️", title:"Marine Geographer & Ocean Mapper",
+    achievement:"World-renowned oceanographer and marine geographer who has dived to the deepest point of the ocean (Challenger Deep in the Mariana Trench) and mapped more of the ocean floor than almost anyone.",
+    funfact:"She dove nearly 7 miles below the ocean's surface in 2022. She is the Chief Scientist of Esri, the company that makes the world's most widely used mapping software — mapping the planet from the deepest seas to outer space." },
+
+  { id:178, name:"J. Marshall Shepherd",         years:"1969–",     cat:"Science",     emoji:"⛈️", title:"Meteorologist & Climate Scientist",
+    achievement:"Award-winning meteorologist who served as president of the American Meteorological Society; uses research and science communication to explain extreme weather, climate change, and urban heat to the public.",
+    funfact:"He published his first scientific paper while still in high school — studying rainfall patterns around Atlanta's urban heat island. He went on to become one of the most visible science communicators in America." },
+
+  // ── AVIATION PIONEERS ──
+  { id:179, name:"Bessie Coleman",               years:"1892–1926", cat:"Space",       emoji:"✈️", title:"First Black Woman Pilot",
+    photo:"https://upload.wikimedia.org/wikipedia/commons/thumb/0/09/Bessie_Coleman.jpg/300px-Bessie_Coleman.jpg",
+    achievement:"First African American woman to earn a pilot's license — going to France to train because no American flight school would accept her. She performed daring air shows to inspire Black audiences to dream big.",
+    funfact:"She was told no American school would teach a Black woman to fly. So she learned French, traveled to Paris, earned her international pilot's license in 1921, and came home to fly stunts that made audiences gasp." },
+
+  { id:180, name:"Eugene Bullard",               years:"1895–1961", cat:"Space",       emoji:"🎖️", title:"First Black Military Pilot",
+    achievement:"First African American military pilot in history — flying for France during World War I when America's military wouldn't accept Black pilots. A decorated war hero, boxer, nightclub owner, and spy.",
+    funfact:"He ran away from home in Georgia at age 11 to escape racism, eventually reached France, became a boxing champion, a WWI fighter pilot, and later a spy for the French Resistance in WWII. An extraordinary life." },
+
+  { id:181, name:"Willa Brown",                  years:"1906–1992", cat:"Space",       emoji:"🛩️", title:"Aviator & Flight Instructor",
+    achievement:"Pioneer aviator and the first African American woman to hold both a commercial pilot's license and a mechanic's license; trained hundreds of pilots and advocated for Black aviators in the U.S. military.",
+    funfact:"She co-founded the Coffey School of Aeronautics in Chicago, which trained the pilots who became the legendary Tuskegee Airmen — making her one of the hidden founders of that celebrated program." },
+
+  { id:182, name:"Janet Harmon Bragg",           years:"1907–1993", cat:"Space",       emoji:"🛫", title:"Aviator",
+    achievement:"Pioneer Black aviator who used her own money to build a runway for Black pilots in Illinois at a time when Black aviators were barred from using most airports; a passionate supporter of the Tuskegee Airmen.",
+    funfact:"She passed her pilot flight test with a perfect score but the examiner refused to give her the commercial license because she was Black. She later received it from another examiner — but never forgot that injustice." },
+
+  { id:183, name:"Frederick Gregory",            years:"1941–",     cat:"Space",       emoji:"🚀", title:"Astronaut",
+    achievement:"First African American to command a Space Shuttle — commanding three different Space Shuttle missions. Later served as NASA Deputy Administrator, one of the highest positions in the space agency.",
+    funfact:"He was a combat helicopter pilot in Vietnam before becoming an astronaut. He logged over 455 hours in space across his three Space Shuttle missions and helped shape NASA policy for a generation." },
+
+  { id:184, name:"Bernard Harris Jr.",           years:"1956–",     cat:"Space",       emoji:"🌍", title:"Astronaut & Physician",
+    achievement:"First African American to walk in space — performing a spacewalk during Space Shuttle Discovery's STS-63 mission in February 1995. Also a physician who studied how the human body adapts to space.",
+    funfact:"His spacewalk lasted over 4 hours and he became the first Black person to float freely in space outside a spacecraft. He's also a venture capitalist who invests in science education for underserved youth." },
+
+  { id:185, name:"Joan Higginbotham",            years:"1964–",     cat:"Space",       emoji:"🛸", title:"Astronaut & Electrical Engineer",
+    achievement:"Electrical engineer who flew on Space Shuttle Discovery in 2006 as a mission specialist to the International Space Station — logging over 308 hours in space.",
+    funfact:"She worked as an engineer at Kennedy Space Center for 13 years before becoming an astronaut, processing Space Shuttles for launch. She knew the vehicles she'd eventually fly in from the inside out." },
+
+  // ── PSYCHOLOGY PIONEERS ──
+  { id:186, name:"Mamie Phipps Clark",           years:"1917–1983", cat:"Science",     emoji:"🪆", title:"Psychologist",
+    photo:"https://upload.wikimedia.org/wikipedia/commons/thumb/3/32/Mamie_Phipps_Clark.jpg/300px-Mamie_Phipps_Clark.jpg",
+    achievement:"Conducted the famous 'doll studies' — showing that Black children as young as 3 had already internalized racist ideas about themselves. Her research was cited in the Supreme Court's Brown v. Board of Education decision ending school segregation.",
+    funfact:"Her simple experiment — asking children to choose between Black and white dolls — revealed profound truths about how racism damages children's self-image. Her science literally helped change the law of the land." },
+
+  { id:187, name:"Kenneth Clark",                years:"1914–2005", cat:"Science",     emoji:"⚖️", title:"Psychologist",
+    achievement:"Collaborated with Mamie Phipps Clark on the doll studies; their combined research on the psychological effects of segregation was so powerful it was used as direct evidence in the Brown v. Board of Education Supreme Court case.",
+    funfact:"He was the first Black president of the American Psychological Association and spent his career showing that racism is not just unjust — it is psychologically destructive to children. Science in service of justice." },
+
+  { id:188, name:"Inez Beverly Prosser",         years:"1895–1934", cat:"Science",     emoji:"🎓", title:"Psychologist",
+    achievement:"One of the first African American women to earn a PhD in psychology (1933); her research examined the psychological effects of segregated versus integrated schooling on Black children.",
+    funfact:"She died tragically in a car accident just months after completing her doctorate. Her research, done when almost no one cared about Black children's mental health, helped plant the seeds of the civil rights argument for school integration." },
+
+  { id:189, name:"Patricia Cowings",             years:"1948–",     cat:"Science",     emoji:"🧘", title:"Psychophysiologist",
+    achievement:"NASA scientist who developed Autogenic-Feedback Training Exercise — a biofeedback technique to help astronauts control their own body responses and prevent space sickness without medication.",
+    funfact:"First American woman to be trained as a scientist-astronaut, she spent her career at NASA Ames Research Center finding ways to help astronauts master their own bodies in the disorienting environment of space." }
+];
+
+// ── STATE ──
+let filteredHeroes = [...STEM_HEROES];
+let currentIndex   = 0;
+let isFlipped      = false;
+let mode           = 'flashcard'; // 'flashcard' | 'quiz'
+
+// Quiz state
+let quizQuestions  = [];
+let quizIndex      = 0;
+let quizScore      = 0;
+let quizAnswered   = false;
+let streak         = 0;
+
+// ── FLASHCARD LOGIC ──
+function renderCard() {
+  const hero = filteredHeroes[currentIndex];
+  if (!hero) return;
+
+  // Reset flip
+  isFlipped = false;
+  document.getElementById('flip-card').classList.remove('flipped');
+
+  // Front — photo or emoji
+  const photoWrap = document.getElementById('card-photo-wrap');
+  if (hero.photo) {
+    photoWrap.innerHTML = `<img src="${hero.photo}" alt="Photo of ${hero.name}" onerror="this.parentElement.innerHTML='<span class=\\'card-photo-emoji\\'>${hero.emoji}</span>'">`;
+  } else {
+    photoWrap.innerHTML = `<span class="card-photo-emoji">${hero.emoji}</span>`;
+  }
+  document.getElementById('card-badge').textContent   = hero.cat;
+  document.getElementById('card-badge').className     = `card-category-badge cat-${hero.cat}`;
+  document.getElementById('card-name').textContent    = hero.name;
+  document.getElementById('card-years').textContent   = hero.years;
+  document.getElementById('card-title').textContent   = hero.title;
+
+  // Back
+  document.getElementById('back-badge').textContent   = hero.cat;
+  document.getElementById('back-badge').className     = `card-category-badge cat-${hero.cat}`;
+  document.getElementById('back-achievement').textContent = hero.achievement;
+  document.getElementById('back-funfact').textContent = hero.funFact;
+
+  // Counter & progress
+  const total = filteredHeroes.length;
+  document.getElementById('card-counter').textContent = `Card ${currentIndex + 1} of ${total}`;
+  const pct = Math.round(((currentIndex + 1) / total) * 100);
+  document.getElementById('progress-fill').style.width = pct + '%';
+}
+
+function flipCard() {
+  isFlipped = !isFlipped;
+  document.getElementById('flip-card').classList.toggle('flipped', isFlipped);
+}
+
+function nextCard() {
+  currentIndex = (currentIndex + 1) % filteredHeroes.length;
+  renderCard();
+}
+
+function prevCard() {
+  currentIndex = (currentIndex - 1 + filteredHeroes.length) % filteredHeroes.length;
+  renderCard();
+}
+
+function shuffleCards() {
+  for (let i = filteredHeroes.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [filteredHeroes[i], filteredHeroes[j]] = [filteredHeroes[j], filteredHeroes[i]];
+  }
+  currentIndex = 0;
+  renderCard();
+}
+
+function filterCards(cat) {
+  document.querySelectorAll('.filter-btn').forEach(b => {
+    b.classList.toggle('active', b.dataset.cat === cat);
+  });
+  document.getElementById('search-input').value = '';
+  filteredHeroes = cat === 'All' ? [...STEM_HEROES] : STEM_HEROES.filter(h => h.cat === cat);
+  currentIndex = 0;
+  renderCard();
+}
+
+function onSearch() {
+  const q = document.getElementById('search-input').value.toLowerCase().trim();
+  document.querySelectorAll('.filter-btn').forEach(b => b.classList.toggle('active', b.dataset.cat === 'All' && !q));
+  filteredHeroes = q
+    ? STEM_HEROES.filter(h => h.name.toLowerCase().includes(q) || h.title.toLowerCase().includes(q) || h.cat.toLowerCase().includes(q))
+    : [...STEM_HEROES];
+  currentIndex = 0;
+  renderCard();
+}
+
+// Keyboard navigation
+document.addEventListener('keydown', e => {
+  if (mode !== 'flashcard') return;
+  if (e.key === 'ArrowRight') nextCard();
+  if (e.key === 'ArrowLeft')  prevCard();
+  if (e.key === ' ' || e.key === 'Enter') { e.preventDefault(); flipCard(); }
+});
+
+// ── QUIZ LOGIC ──
+const QUIZ_TYPES = ['whoIs', 'whatDid', 'whichCat'];
+
+function generateQuiz() {
+  const pool = [...STEM_HEROES].sort(() => Math.random() - 0.5).slice(0, 10);
+  quizQuestions = pool.map(hero => {
+    const type = QUIZ_TYPES[Math.floor(Math.random() * QUIZ_TYPES.length)];
+    const wrongHeroes = STEM_HEROES.filter(h => h.id !== hero.id).sort(() => Math.random() - 0.5).slice(0, 3);
+    const allOptions  = [hero, ...wrongHeroes].sort(() => Math.random() - 0.5);
+    return { hero, type, options: allOptions };
+  });
+  quizIndex   = 0;
+  quizScore   = 0;
+  quizAnswered = false;
+  streak      = 0;
+}
+
+function getQuestionText(q) {
+  switch (q.type) {
+    case 'whoIs':   return `"${q.hero.achievement.substring(0, 80)}…"\n\nWho is this STEM hero?`;
+    case 'whatDid': return `Which STEM hero was known as:\n"${q.hero.title}"?`;
+    case 'whichCat': return `${q.hero.name} is a pioneer in which field of STEM?`;
+  }
+}
+
+function renderQuizQuestion() {
+  const q   = quizQuestions[quizIndex];
+  document.getElementById('quiz-emoji').textContent = q.hero.emoji;
+  document.getElementById('quiz-q-num').textContent = quizIndex + 1;
+  document.getElementById('quiz-score').textContent = quizScore;
+
+  const questionEl = document.getElementById('quiz-question');
+  const typeEl     = document.getElementById('quiz-q-type');
+
+  switch (q.type) {
+    case 'whoIs':    typeEl.textContent = '❓ WHO IS THIS STEM HERO?';   break;
+    case 'whatDid':  typeEl.textContent = '🏅 IDENTIFY THE HERO';         break;
+    case 'whichCat': typeEl.textContent = '📂 WHAT FIELD DO THEY WORK IN?'; break;
+  }
+  questionEl.textContent = getQuestionText(q);
+
+  const optsEl = document.getElementById('quiz-options');
+  optsEl.innerHTML = '';
+
+  if (q.type === 'whichCat') {
+    // category question — options are category names
+    const cats = ['Science','Tech','Engineering','Math','Medicine','Space'];
+    const correctCat = q.hero.cat;
+    const wrongCats  = cats.filter(c => c !== correctCat).sort(() => Math.random()-0.5).slice(0,3);
+    const catOptions = [correctCat, ...wrongCats].sort(() => Math.random() - 0.5);
+    catOptions.forEach(cat => {
+      const btn = document.createElement('button');
+      btn.className = 'quiz-option';
+      btn.textContent = cat;
+      btn.onclick = () => selectAnswer(btn, cat === correctCat, correctCat);
+      optsEl.appendChild(btn);
+    });
+  } else {
+    q.options.forEach(hero => {
+      const btn = document.createElement('button');
+      btn.className = 'quiz-option';
+      btn.textContent = hero.name;
+      btn.onclick = () => selectAnswer(btn, hero.id === q.hero.id, q.hero.name);
+      optsEl.appendChild(btn);
+    });
+  }
+
+  document.getElementById('quiz-feedback').className = 'quiz-feedback';
+  document.getElementById('quiz-feedback').textContent = '';
+  document.getElementById('quiz-next').style.display = 'none';
+  document.getElementById('quiz-streak').textContent = streak > 1 ? `🔥 ${streak} in a row!` : '';
+  quizAnswered = false;
+}
+
+function selectAnswer(btn, isCorrect, correctAnswer) {
+  if (quizAnswered) return;
+  quizAnswered = true;
+
+  const allBtns = document.querySelectorAll('.quiz-option');
+  allBtns.forEach(b => b.disabled = true);
+
+  const fb = document.getElementById('quiz-feedback');
+  if (isCorrect) {
+    btn.classList.add('correct');
+    quizScore++;
+    streak++;
+    fb.textContent = `✅ Correct! +1 point — You're crushing it!`;
+    fb.className   = 'quiz-feedback show correct-fb';
+  } else {
+    btn.classList.add('wrong');
+    streak = 0;
+    // Highlight the correct answer
+    allBtns.forEach(b => { if (b.textContent === correctAnswer) b.classList.add('correct'); });
+    fb.textContent = `❌ Not quite! The answer was: ${correctAnswer}`;
+    fb.className   = 'quiz-feedback show wrong-fb';
+  }
+  document.getElementById('quiz-score').textContent = quizScore;
+  document.getElementById('quiz-streak').textContent = streak > 1 ? `🔥 ${streak} in a row!` : '';
+  document.getElementById('quiz-next').style.display = 'block';
+}
+
+function nextQuestion() {
+  quizIndex++;
+  if (quizIndex >= quizQuestions.length) {
+    showResults();
+  } else {
+    renderQuizQuestion();
+  }
+}
+
+function showResults() {
+  document.getElementById('quiz-active').style.display = 'none';
+  const results = document.getElementById('results-screen');
+  results.style.display = 'block';
+
+  const pct  = Math.round((quizScore / quizQuestions.length) * 100);
+  const ring = document.getElementById('results-ring');
+
+  // Animate ring
+  ring.style.background = `conic-gradient(#F5A623 ${pct * 3.6}deg, rgba(255,255,255,0.1) 0deg)`;
+  document.getElementById('results-pct').textContent = pct + '%';
+
+  if (pct === 100) {
+    document.getElementById('results-emoji').textContent  = '🏆';
+    document.getElementById('results-title').textContent  = 'Perfect Score!';
+    document.getElementById('results-sub').textContent    = `${quizScore}/${quizQuestions.length} correct — You know your STEM heroes!`;
+  } else if (pct >= 70) {
+    document.getElementById('results-emoji').textContent  = '⭐';
+    document.getElementById('results-title').textContent  = 'Great Job!';
+    document.getElementById('results-sub').textContent    = `${quizScore}/${quizQuestions.length} correct — Keep studying the flashcards!`;
+  } else if (pct >= 40) {
+    document.getElementById('results-emoji').textContent  = '📚';
+    document.getElementById('results-title').textContent  = 'Keep Learning!';
+    document.getElementById('results-sub').textContent    = `${quizScore}/${quizQuestions.length} correct — Review the cards and try again!`;
+  } else {
+    document.getElementById('results-emoji').textContent  = '💪🏾';
+    document.getElementById('results-title').textContent  = 'Keep Going!';
+    document.getElementById('results-sub').textContent    = `${quizScore}/${quizQuestions.length} correct — Study mode is your friend!`;
+  }
+}
+
+function restartQuiz() {
+  document.getElementById('results-screen').style.display  = 'none';
+  document.getElementById('quiz-active').style.display     = 'block';
+  generateQuiz();
+  renderQuizQuestion();
+}
+
+// ── MODE SWITCHING ──
+function setMode(newMode) {
+  mode = newMode;
+  document.querySelectorAll('.mode-btn').forEach((b, i) => {
+    b.classList.toggle('active', (i === 0 && newMode === 'flashcard') || (i === 1 && newMode === 'quiz'));
+  });
+  document.getElementById('flashcard-section').style.display = newMode === 'flashcard' ? 'block' : 'none';
+  document.getElementById('quiz-section').style.display      = newMode === 'quiz'       ? 'block' : 'none';
+
+  if (newMode === 'quiz') {
+    document.getElementById('results-screen').style.display = 'none';
+    document.getElementById('quiz-active').style.display    = 'block';
+    generateQuiz();
+    renderQuizQuestion();
+  }
+}
+
+// ── INIT ──
+document.getElementById('filter-all-btn').textContent = `All ${STEM_HEROES.length}`;
+document.getElementById('footer-count').textContent   = STEM_HEROES.length;
+renderCard();
+</script>
+</body>
+</html>

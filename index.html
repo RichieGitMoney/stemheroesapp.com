@@ -1,0 +1,1279 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>STEM Heroes — Black Excellence in Science, Technology, Engineering & Math</title>
+<meta name="description" content="STEM Heroes is a free interactive learning app featuring 188 African American STEM pioneers. School and district licensing available.">
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&family=Merriweather:wght@700;900&display=swap');
+
+:root {
+  --gold:    #F5A623;
+  --gold-lt: #FDD882;
+  --purple:  #1A0A2E;
+  --purple2: #2D1B69;
+  --green:   #27AE60;
+  --red:     #C0392B;
+  --blue:    #2980B9;
+  --teal:    #16A085;
+  --white:   #ffffff;
+  --offwhite:#F8F6F2;
+  --gray:    #6B7280;
+  --dark:    #111827;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: 'Nunito', sans-serif;
+  color: var(--dark);
+  background: var(--white);
+  line-height: 1.6;
+}
+
+/* ── NAV ── */
+nav {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: var(--purple);
+  border-bottom: 3px solid var(--gold);
+  padding: 0 5%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 64px;
+}
+
+.nav-logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  text-decoration: none;
+}
+
+.nav-logo-icon {
+  width: 38px;
+  height: 38px;
+  background: var(--gold);
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.3rem;
+}
+
+.nav-logo-text {
+  font-weight: 900;
+  font-size: 1.1rem;
+  color: var(--white);
+  letter-spacing: -0.3px;
+}
+
+.nav-logo-text span { color: var(--gold); }
+
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: 28px;
+  list-style: none;
+}
+
+.nav-links a {
+  color: rgba(255,255,255,0.8);
+  text-decoration: none;
+  font-size: 0.9rem;
+  font-weight: 700;
+  transition: color 0.2s;
+}
+
+.nav-links a:hover { color: var(--gold); }
+
+.nav-cta {
+  background: var(--gold);
+  color: var(--purple) !important;
+  padding: 8px 20px;
+  border-radius: 24px;
+  font-weight: 900 !important;
+  transition: transform 0.2s !important;
+}
+
+.nav-cta:hover { transform: scale(1.04); }
+
+/* ── HERO SECTION ── */
+.hero {
+  background: linear-gradient(135deg, var(--purple) 0%, var(--purple2) 60%, #3D2C8D 100%);
+  color: var(--white);
+  padding: 90px 5% 80px;
+  position: relative;
+  overflow: hidden;
+}
+
+.hero::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse at 85% 30%, rgba(245,166,35,0.12) 0%, transparent 55%),
+    radial-gradient(ellipse at 10% 80%, rgba(22,160,133,0.1) 0%, transparent 50%);
+  pointer-events: none;
+}
+
+/* Pan-African stripe accent */
+.hero::after {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 5px;
+  background: linear-gradient(90deg, #C0392B 0%, #C0392B 33%, #1a1a1a 33%, #1a1a1a 66%, #27AE60 66%, #27AE60 100%);
+}
+
+.hero-inner {
+  max-width: 1100px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 60px;
+  align-items: center;
+}
+
+.hero-badge {
+  display: inline-block;
+  background: rgba(245,166,35,0.15);
+  border: 1px solid rgba(245,166,35,0.4);
+  color: var(--gold);
+  font-size: 0.75rem;
+  font-weight: 800;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  padding: 6px 16px;
+  border-radius: 20px;
+  margin-bottom: 20px;
+}
+
+.hero h1 {
+  font-family: 'Merriweather', serif;
+  font-size: clamp(2rem, 4vw, 3.2rem);
+  font-weight: 900;
+  line-height: 1.15;
+  margin-bottom: 20px;
+}
+
+.hero h1 span { color: var(--gold); }
+
+.hero-sub {
+  font-size: 1.1rem;
+  color: rgba(255,255,255,0.8);
+  line-height: 1.7;
+  margin-bottom: 32px;
+  max-width: 480px;
+}
+
+.hero-btns {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.btn-primary {
+  display: inline-block;
+  background: var(--gold);
+  color: var(--purple);
+  font-weight: 900;
+  font-size: 1rem;
+  padding: 14px 32px;
+  border-radius: 32px;
+  text-decoration: none;
+  transition: transform 0.2s, box-shadow 0.2s;
+  box-shadow: 0 4px 20px rgba(245,166,35,0.4);
+}
+
+.btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 28px rgba(245,166,35,0.5); }
+
+.btn-outline {
+  display: inline-block;
+  background: transparent;
+  color: var(--white);
+  font-weight: 800;
+  font-size: 1rem;
+  padding: 14px 32px;
+  border-radius: 32px;
+  border: 2px solid rgba(255,255,255,0.35);
+  text-decoration: none;
+  transition: all 0.2s;
+}
+
+.btn-outline:hover { border-color: var(--white); background: rgba(255,255,255,0.08); }
+
+/* Hero visual — card mockup */
+.hero-visual {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.mockup-card {
+  background: white;
+  border-radius: 24px;
+  padding: 28px 24px 22px;
+  width: 280px;
+  box-shadow: 0 30px 80px rgba(0,0,0,0.5), 0 0 0 1px rgba(255,255,255,0.1);
+  text-align: center;
+  position: relative;
+  animation: float 4s ease-in-out infinite;
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+
+.mockup-photo-ring {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  border: 4px solid var(--gold);
+  margin: 0 auto 12px;
+  background: linear-gradient(135deg, #f0e6d3, #d4c5a9);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 3rem;
+  overflow: hidden;
+}
+
+.mockup-photo-ring img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: top center;
+}
+
+.mockup-badge {
+  font-size: 0.65rem;
+  font-weight: 800;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  background: rgba(41,128,185,0.15);
+  color: #2980B9;
+  padding: 3px 10px;
+  border-radius: 10px;
+  margin-bottom: 8px;
+  display: inline-block;
+}
+
+.mockup-name {
+  font-weight: 900;
+  font-size: 1.1rem;
+  color: var(--dark);
+  margin-bottom: 4px;
+}
+
+.mockup-title {
+  font-size: 0.78rem;
+  color: var(--gray);
+  margin-bottom: 14px;
+}
+
+.mockup-tap {
+  font-size: 0.7rem;
+  color: #aaa;
+  margin-top: 6px;
+}
+
+.mockup-floating {
+  position: absolute;
+  background: white;
+  border-radius: 14px;
+  padding: 8px 14px;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.2);
+  font-size: 0.75rem;
+  font-weight: 800;
+  white-space: nowrap;
+}
+
+.mockup-f1 { top: -16px; right: -24px; color: var(--green); }
+.mockup-f2 { bottom: 24px; left: -32px; color: var(--purple2); }
+
+/* ── STATS BAR ── */
+.stats-bar {
+  background: var(--gold);
+  padding: 20px 5%;
+}
+
+.stats-inner {
+  max-width: 1000px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+
+.stat-item {
+  text-align: center;
+}
+
+.stat-num {
+  font-family: 'Merriweather', serif;
+  font-size: 2rem;
+  font-weight: 900;
+  color: var(--purple);
+  display: block;
+  line-height: 1;
+}
+
+.stat-label {
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: rgba(26,10,46,0.7);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+/* ── SECTION BASE ── */
+section { padding: 80px 5%; }
+
+.section-inner { max-width: 1100px; margin: 0 auto; }
+
+.section-tag {
+  font-size: 0.75rem;
+  font-weight: 800;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 10px;
+  display: block;
+}
+
+.section-title {
+  font-family: 'Merriweather', serif;
+  font-size: clamp(1.6rem, 3vw, 2.4rem);
+  font-weight: 900;
+  color: var(--purple);
+  margin-bottom: 14px;
+  line-height: 1.2;
+}
+
+.section-sub {
+  font-size: 1.05rem;
+  color: var(--gray);
+  max-width: 600px;
+  line-height: 1.7;
+}
+
+/* ── ABOUT / FEATURES ── */
+.about { background: var(--offwhite); }
+
+.features-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 24px;
+  margin-top: 48px;
+}
+
+.feature-card {
+  background: white;
+  border-radius: 20px;
+  padding: 28px 24px;
+  box-shadow: 0 2px 16px rgba(0,0,0,0.06);
+  border-top: 4px solid transparent;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.feature-card:hover { transform: translateY(-4px); box-shadow: 0 8px 32px rgba(0,0,0,0.1); }
+.feature-card.c1 { border-top-color: var(--gold); }
+.feature-card.c2 { border-top-color: var(--green); }
+.feature-card.c3 { border-top-color: var(--blue); }
+.feature-card.c4 { border-top-color: var(--teal); }
+.feature-card.c5 { border-top-color: var(--red); }
+.feature-card.c6 { border-top-color: var(--purple2); }
+
+.feature-icon { font-size: 2.2rem; margin-bottom: 14px; }
+.feature-title { font-weight: 900; font-size: 1.05rem; margin-bottom: 8px; color: var(--dark); }
+.feature-desc  { font-size: 0.9rem; color: var(--gray); line-height: 1.6; }
+
+/* ── CURRICULUM SECTION ── */
+.curriculum { background: white; }
+
+.curriculum-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 60px;
+  margin-top: 48px;
+  align-items: start;
+}
+
+.standards-list { list-style: none; }
+
+.standards-list li {
+  display: flex;
+  gap: 14px;
+  padding: 14px 0;
+  border-bottom: 1px solid #F0EDE8;
+  align-items: flex-start;
+}
+
+.standards-list li:last-child { border-bottom: none; }
+
+.std-icon {
+  width: 36px;
+  height: 36px;
+  border-radius: 10px;
+  background: var(--gold);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1rem;
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+.std-text strong { display: block; font-weight: 800; font-size: 0.95rem; color: var(--dark); }
+.std-text span   { font-size: 0.85rem; color: var(--gray); }
+
+.states-box {
+  background: var(--purple);
+  border-radius: 20px;
+  padding: 28px;
+  color: white;
+}
+
+.states-box h3 {
+  font-weight: 900;
+  font-size: 1.1rem;
+  color: var(--gold);
+  margin-bottom: 6px;
+}
+
+.states-box p {
+  font-size: 0.85rem;
+  color: rgba(255,255,255,0.7);
+  margin-bottom: 18px;
+  line-height: 1.6;
+}
+
+.states-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.state-chip {
+  background: rgba(245,166,35,0.15);
+  border: 1px solid rgba(245,166,35,0.35);
+  color: var(--gold);
+  font-size: 0.78rem;
+  font-weight: 800;
+  padding: 5px 12px;
+  border-radius: 12px;
+}
+
+.hero-categories {
+  margin-top: 24px;
+}
+
+.hero-categories h3 {
+  font-weight: 900;
+  font-size: 1rem;
+  margin-bottom: 14px;
+  color: var(--dark);
+}
+
+.cat-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+
+.cat-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: var(--offwhite);
+  border-radius: 12px;
+  padding: 10px 14px;
+  font-size: 0.85rem;
+  font-weight: 700;
+}
+
+.cat-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+/* ── PRICING ── */
+.pricing { background: var(--offwhite); }
+
+.pricing-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 24px;
+  margin-top: 48px;
+  align-items: start;
+}
+
+.pricing-card {
+  background: white;
+  border-radius: 24px;
+  padding: 32px 28px;
+  box-shadow: 0 2px 16px rgba(0,0,0,0.07);
+  position: relative;
+}
+
+.pricing-card.featured {
+  background: var(--purple);
+  color: white;
+  transform: scale(1.04);
+  box-shadow: 0 16px 48px rgba(26,10,46,0.35);
+}
+
+.pricing-badge {
+  position: absolute;
+  top: -14px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: var(--gold);
+  color: var(--purple);
+  font-size: 0.7rem;
+  font-weight: 900;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  padding: 5px 16px;
+  border-radius: 20px;
+  white-space: nowrap;
+}
+
+.pricing-tier {
+  font-size: 0.75rem;
+  font-weight: 800;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 8px;
+}
+
+.featured .pricing-tier { color: var(--gold-lt); }
+
+.pricing-name {
+  font-family: 'Merriweather', serif;
+  font-size: 1.4rem;
+  font-weight: 900;
+  color: var(--dark);
+  margin-bottom: 6px;
+}
+
+.featured .pricing-name { color: white; }
+
+.pricing-price {
+  font-size: 2.4rem;
+  font-weight: 900;
+  color: var(--purple);
+  line-height: 1;
+  margin-bottom: 4px;
+}
+
+.featured .pricing-price { color: var(--gold); }
+
+.pricing-price span {
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--gray);
+}
+
+.featured .pricing-price span { color: rgba(255,255,255,0.6); }
+
+.pricing-desc {
+  font-size: 0.85rem;
+  color: var(--gray);
+  margin-bottom: 24px;
+  line-height: 1.6;
+}
+
+.featured .pricing-desc { color: rgba(255,255,255,0.7); }
+
+.pricing-features {
+  list-style: none;
+  margin-bottom: 28px;
+}
+
+.pricing-features li {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  font-size: 0.9rem;
+  padding: 7px 0;
+  color: var(--dark);
+  border-bottom: 1px solid #F0EDE8;
+}
+
+.featured .pricing-features li {
+  color: rgba(255,255,255,0.9);
+  border-bottom-color: rgba(255,255,255,0.1);
+}
+
+.pricing-features li:last-child { border-bottom: none; }
+
+.check {
+  color: var(--green);
+  font-weight: 900;
+  font-size: 1rem;
+  flex-shrink: 0;
+  line-height: 1.4;
+}
+
+.featured .check { color: var(--gold); }
+
+.pricing-btn {
+  display: block;
+  text-align: center;
+  padding: 13px;
+  border-radius: 16px;
+  font-weight: 900;
+  font-size: 0.95rem;
+  text-decoration: none;
+  transition: all 0.2s;
+  cursor: pointer;
+}
+
+.pricing-btn-outline {
+  border: 2px solid #E5E7EB;
+  color: var(--dark);
+  background: white;
+}
+
+.pricing-btn-outline:hover { border-color: var(--purple); color: var(--purple); }
+
+.pricing-btn-gold {
+  background: var(--gold);
+  color: var(--purple);
+  border: 2px solid var(--gold);
+  box-shadow: 0 4px 16px rgba(245,166,35,0.4);
+}
+
+.pricing-btn-gold:hover { transform: translateY(-2px); }
+
+.pricing-btn-purple {
+  background: rgba(255,255,255,0.12);
+  color: white;
+  border: 2px solid rgba(255,255,255,0.3);
+}
+
+.pricing-btn-purple:hover { background: rgba(255,255,255,0.2); }
+
+.pricing-note {
+  text-align: center;
+  margin-top: 28px;
+  font-size: 0.85rem;
+  color: var(--gray);
+}
+
+.pricing-note a { color: var(--purple); font-weight: 700; }
+
+/* ── HOW IT WORKS ── */
+.how { background: white; }
+
+.steps {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 32px;
+  margin-top: 48px;
+  position: relative;
+}
+
+.step {
+  text-align: center;
+}
+
+.step-num {
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  background: var(--purple);
+  color: var(--gold);
+  font-family: 'Merriweather', serif;
+  font-size: 1.4rem;
+  font-weight: 900;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 16px;
+}
+
+.step-title {
+  font-weight: 900;
+  font-size: 1rem;
+  margin-bottom: 8px;
+  color: var(--dark);
+}
+
+.step-desc {
+  font-size: 0.875rem;
+  color: var(--gray);
+  line-height: 1.6;
+}
+
+/* ── CONTACT / CTA ── */
+.contact-section {
+  background: linear-gradient(135deg, var(--purple) 0%, var(--purple2) 100%);
+  color: white;
+  text-align: center;
+  padding: 80px 5%;
+  position: relative;
+  overflow: hidden;
+}
+
+.contact-section::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse at 50% 0%, rgba(245,166,35,0.15) 0%, transparent 60%);
+  pointer-events: none;
+}
+
+.contact-section::after {
+  content: '';
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  height: 5px;
+  background: linear-gradient(90deg, #C0392B 0%, #C0392B 33%, #1a1a1a 33%, #1a1a1a 66%, #27AE60 66%, #27AE60 100%);
+}
+
+.contact-inner {
+  max-width: 600px;
+  margin: 0 auto;
+  position: relative;
+  z-index: 1;
+}
+
+.contact-section .section-title { color: white; }
+
+.contact-section .section-sub { color: rgba(255,255,255,0.75); margin: 0 auto 36px; }
+
+.contact-form {
+  background: rgba(255,255,255,0.07);
+  border: 1px solid rgba(255,255,255,0.15);
+  border-radius: 24px;
+  padding: 32px;
+  text-align: left;
+}
+
+.form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  margin-bottom: 16px;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-bottom: 16px;
+}
+
+.form-group label {
+  font-size: 0.8rem;
+  font-weight: 800;
+  color: rgba(255,255,255,0.7);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea {
+  background: rgba(255,255,255,0.08);
+  border: 1px solid rgba(255,255,255,0.2);
+  border-radius: 12px;
+  padding: 12px 16px;
+  color: white;
+  font-family: 'Nunito', sans-serif;
+  font-size: 0.95rem;
+  outline: none;
+  transition: border 0.2s;
+  width: 100%;
+}
+
+.form-group input::placeholder,
+.form-group textarea::placeholder { color: rgba(255,255,255,0.35); }
+
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus { border-color: var(--gold); }
+
+.form-group select option { background: var(--purple); color: white; }
+
+.form-group textarea { resize: vertical; min-height: 90px; }
+
+.form-submit {
+  width: 100%;
+  padding: 14px;
+  border-radius: 16px;
+  border: none;
+  background: var(--gold);
+  color: var(--purple);
+  font-family: 'Nunito', sans-serif;
+  font-size: 1rem;
+  font-weight: 900;
+  cursor: pointer;
+  transition: transform 0.2s;
+  margin-top: 4px;
+}
+
+.form-submit:hover { transform: scale(1.02); }
+
+.direct-email {
+  text-align: center;
+  margin-top: 20px;
+  font-size: 0.85rem;
+  color: rgba(255,255,255,0.6);
+}
+
+.direct-email a {
+  color: var(--gold);
+  font-weight: 700;
+  text-decoration: none;
+}
+
+/* ── FOOTER ── */
+footer {
+  background: #0D0618;
+  color: rgba(255,255,255,0.5);
+  padding: 32px 5%;
+  text-align: center;
+  font-size: 0.82rem;
+  line-height: 1.8;
+}
+
+footer strong { color: rgba(255,255,255,0.8); }
+
+footer .footer-stripe {
+  height: 4px;
+  background: linear-gradient(90deg, #C0392B 0%, #C0392B 33%, #1a1a1a 33%, #1a1a1a 66%, #27AE60 66%, #27AE60 100%);
+  margin-bottom: 24px;
+}
+
+/* ── RESPONSIVE ── */
+@media (max-width: 768px) {
+  .hero-inner         { grid-template-columns: 1fr; text-align: center; gap: 40px; }
+  .hero-btns          { justify-content: center; }
+  .hero-sub           { margin: 0 auto 32px; }
+  .curriculum-grid    { grid-template-columns: 1fr; }
+  .cat-grid           { grid-template-columns: 1fr 1fr; }
+  .form-row           { grid-template-columns: 1fr; }
+  .pricing-card.featured { transform: scale(1); }
+  .nav-links          { display: none; }
+  .mockup-f1, .mockup-f2 { display: none; }
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a class="nav-logo" href="#">
+    <div class="nav-logo-icon">✊🏾</div>
+    <span class="nav-logo-text">STEM <span>Heroes</span></span>
+  </a>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#curriculum">For Educators</a></li>
+    <li><a href="#pricing">Pricing</a></li>
+    <li><a href="#contact" class="nav-cta">Get a Quote</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-inner">
+    <div class="hero-text">
+      <div class="hero-badge">✊🏾 Black Excellence in STEM</div>
+      <h1>188 Heroes.<br>One <span>Powerful</span><br>Learning App.</h1>
+      <p class="hero-sub">
+        STEM Heroes brings African American pioneers in Science, Technology, Engineering,
+        and Mathematics to life for K–12 students — through interactive flashcards,
+        quizzes, and inspiring true stories.
+      </p>
+      <div class="hero-btns">
+        <a href="#" class="btn-primary">🎮 Try the App Free</a>
+        <a href="#contact" class="btn-outline">🏫 School Licensing →</a>
+      </div>
+    </div>
+    <div class="hero-visual">
+      <div style="position:relative;">
+        <div class="mockup-card">
+          <div class="mockup-photo-ring">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/dc/Katherine_Johnson_at_NASA%2C_in_1966.jpg/300px-Katherine_Johnson_at_NASA%2C_in_1966.jpg"
+                 alt="Katherine Johnson"
+                 onerror="this.parentElement.innerHTML='🧮'">
+          </div>
+          <div class="mockup-badge">Mathematics · NASA</div>
+          <div class="mockup-name">Katherine Johnson</div>
+          <div class="mockup-title">Human Computer · 1918–2020</div>
+          <div style="font-size:0.78rem;color:#555;line-height:1.5;padding:0 4px;">
+            Calculated the flight paths that sent Americans to the Moon. John Glenn refused to fly until she checked the computers.
+          </div>
+          <div class="mockup-tap">👆 Tap to learn more</div>
+        </div>
+        <div class="mockup-floating mockup-f1">⭐ Fun Fact inside!</div>
+        <div class="mockup-floating mockup-f2">🎯 Quiz Mode</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- STATS BAR -->
+<div class="stats-bar">
+  <div class="stats-inner">
+    <div class="stat-item">
+      <span class="stat-num">188</span>
+      <span class="stat-label">STEM Pioneers</span>
+    </div>
+    <div class="stat-item">
+      <span class="stat-num">6</span>
+      <span class="stat-label">STEM Fields</span>
+    </div>
+    <div class="stat-item">
+      <span class="stat-num">K–12</span>
+      <span class="stat-label">Grade Range</span>
+    </div>
+    <div class="stat-item">
+      <span class="stat-num">Free</span>
+      <span class="stat-label">For Students</span>
+    </div>
+    <div class="stat-item">
+      <span class="stat-num">10+</span>
+      <span class="stat-label">States Mandating<br>Black History Ed</span>
+    </div>
+  </div>
+</div>
+
+<!-- ABOUT / FEATURES -->
+<section class="about" id="about">
+  <div class="section-inner">
+    <span class="section-tag">What is STEM Heroes?</span>
+    <h2 class="section-title">Representation that<br>Inspires the Next Generation</h2>
+    <p class="section-sub">
+      Research shows that students perform better and persist longer in STEM when they
+      see people who look like them in those fields. STEM Heroes puts 188 real African
+      American scientists, engineers, mathematicians, and innovators directly into students' hands.
+    </p>
+
+    <div class="features-grid">
+      <div class="feature-card c1">
+        <div class="feature-icon">📚</div>
+        <div class="feature-title">Interactive Flashcards</div>
+        <div class="feature-desc">Flip cards reveal each hero's key achievement and a surprising fun fact. Real photos where available, vivid illustrations throughout.</div>
+      </div>
+      <div class="feature-card c2">
+        <div class="feature-icon">🎯</div>
+        <div class="feature-title">Built-in Quiz Mode</div>
+        <div class="feature-desc">Three question types keep students engaged. Tracks streaks and scores, encouraging healthy competition and repeated learning.</div>
+      </div>
+      <div class="feature-card c3">
+        <div class="feature-icon">🔍</div>
+        <div class="feature-title">Search & Filter</div>
+        <div class="feature-desc">Browse by STEM category — Science, Technology, Engineering, Math, Medicine, and Space. Search by name or field instantly.</div>
+      </div>
+      <div class="feature-card c4">
+        <div class="feature-icon">🌐</div>
+        <div class="feature-title">Works Everywhere</div>
+        <div class="feature-desc">Runs in any browser on Chromebooks, iPads, phones, and desktops. No app download required for web version. Coming to iOS and Android.</div>
+      </div>
+      <div class="feature-card c5">
+        <div class="feature-icon">🏛️</div>
+        <div class="feature-title">188 Real Heroes</div>
+        <div class="feature-desc">From Benjamin Banneker (1731) to Kizzmekia Corbett's COVID-19 vaccine — spanning 300 years of Black excellence in STEM.</div>
+      </div>
+      <div class="feature-card c6">
+        <div class="feature-icon">👶🏾</div>
+        <div class="feature-title">All Ages</div>
+        <div class="feature-desc">Written to engage students from elementary through high school. Simple enough for young learners, substantive enough for older students.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CURRICULUM ALIGNMENT -->
+<section class="curriculum" id="curriculum">
+  <div class="section-inner">
+    <span class="section-tag">For Educators</span>
+    <h2 class="section-title">Built for the Classroom.<br>Aligned to Real Standards.</h2>
+    <p class="section-sub">
+      STEM Heroes isn't just inspiring — it's educationally defensible. Districts can justify
+      the purchase because the content maps directly to standards they're already required to meet.
+    </p>
+
+    <div class="curriculum-grid">
+      <div>
+        <ul class="standards-list">
+          <li>
+            <div class="std-icon">🔬</div>
+            <div class="std-text">
+              <strong>Next Generation Science Standards (NGSS)</strong>
+              <span>Heroes organized by science and engineering practices; supports NOS (Nature of Science) instruction across all grade bands.</span>
+            </div>
+          </li>
+          <li>
+            <div class="std-icon">📖</div>
+            <div class="std-text">
+              <strong>Common Core ELA — Informational Text</strong>
+              <span>Each card functions as a biographical informational text, supporting RI.3–RI.8 reading standards for nonfiction.</span>
+            </div>
+          </li>
+          <li>
+            <div class="std-icon">🏛️</div>
+            <div class="std-text">
+              <strong>Black History / African American Studies Standards</strong>
+              <span>Directly addresses state-mandated Black history curriculum requirements. Covers historical through contemporary figures.</span>
+            </div>
+          </li>
+          <li>
+            <div class="std-icon">🤝</div>
+            <div class="std-text">
+              <strong>Social-Emotional Learning (SEL)</strong>
+              <span>Builds identity, belonging, and growth mindset by showing students what people who look like them have achieved.</span>
+            </div>
+          </li>
+          <li>
+            <div class="std-icon">💻</div>
+            <div class="std-text">
+              <strong>Computer Science & Career Awareness</strong>
+              <span>Expands student understanding of STEM careers — especially for students who have never seen Black professionals in these fields.</span>
+            </div>
+          </li>
+        </ul>
+
+        <div class="hero-categories">
+          <h3>Six STEM categories covered:</h3>
+          <div class="cat-grid">
+            <div class="cat-item"><div class="cat-dot" style="background:#27AE60"></div> Science (58)</div>
+            <div class="cat-item"><div class="cat-dot" style="background:#C0392B"></div> Medicine (37)</div>
+            <div class="cat-item"><div class="cat-dot" style="background:#E67E22"></div> Engineering (31)</div>
+            <div class="cat-item"><div class="cat-dot" style="background:#2980B9"></div> Technology (25)</div>
+            <div class="cat-item"><div class="cat-dot" style="background:#8E44AD"></div> Math (20)</div>
+            <div class="cat-item"><div class="cat-dot" style="background:#16A085"></div> Space (17)</div>
+          </div>
+        </div>
+      </div>
+
+      <div>
+        <div class="states-box">
+          <h3>🗺️ State Mandates Creating Demand</h3>
+          <p>These states have passed laws requiring Black history or African American studies instruction — creating a direct need for quality curriculum materials like STEM Heroes.</p>
+          <div class="states-chips">
+            <span class="state-chip">California</span>
+            <span class="state-chip">Illinois</span>
+            <span class="state-chip">New Jersey</span>
+            <span class="state-chip">Delaware</span>
+            <span class="state-chip">Connecticut</span>
+            <span class="state-chip">Maine</span>
+            <span class="state-chip">New York</span>
+            <span class="state-chip">Washington</span>
+            <span class="state-chip">Nevada</span>
+            <span class="state-chip">Indiana</span>
+            <span class="state-chip">Rhode Island</span>
+            <span class="state-chip">Nebraska</span>
+            <span class="state-chip">Michigan</span>
+            <span class="state-chip">+ more adopting</span>
+          </div>
+        </div>
+
+        <div style="background:#F0FDF4;border-radius:20px;padding:24px;margin-top:20px;border:1px solid #BBF7D0;">
+          <div style="font-size:1.5rem;margin-bottom:8px;">📋</div>
+          <div style="font-weight:900;font-size:0.95rem;color:#166534;margin-bottom:6px;">Curriculum Alignment Guide Available</div>
+          <div style="font-size:0.85rem;color:#15803D;line-height:1.6;">
+            Licensed schools receive a full curriculum alignment document mapping STEM Heroes content to your state's specific standards — ready to present to your principal or curriculum director.
+          </div>
+        </div>
+
+        <div style="background:#FFF7ED;border-radius:20px;padding:24px;margin-top:16px;border:1px solid #FED7AA;">
+          <div style="font-size:1.5rem;margin-bottom:8px;">💰</div>
+          <div style="font-weight:900;font-size:0.95rem;color:#C2410C;margin-bottom:6px;">Title I Eligible</div>
+          <div style="font-size:0.85rem;color:#EA580C;line-height:1.6;">
+            STEM Heroes licensing is eligible for purchase using Title I federal education funds, making it accessible for schools with high-need student populations.
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PRICING -->
+<section class="pricing" id="pricing">
+  <div class="section-inner">
+    <span class="section-tag">Licensing</span>
+    <h2 class="section-title">Simple, Transparent Pricing</h2>
+    <p class="section-sub">
+      The app is always free for individual students. School and district licenses unlock
+      classroom management tools, curriculum alignment guides, and priority support.
+    </p>
+
+    <div class="pricing-grid">
+
+      <!-- Free -->
+      <div class="pricing-card">
+        <div class="pricing-tier">Individual</div>
+        <div class="pricing-name">Free</div>
+        <div class="pricing-price">$0</div>
+        <div class="pricing-desc">Full access to all 188 heroes for individual students, parents, and educators exploring on their own.</div>
+        <ul class="pricing-features">
+          <li><span class="check">✓</span> All 188 STEM Hero cards</li>
+          <li><span class="check">✓</span> Flashcard + Quiz modes</li>
+          <li><span class="check">✓</span> Search & category filter</li>
+          <li><span class="check">✓</span> Works on all devices</li>
+          <li><span class="check" style="color:#D1D5DB;">—</span> <span style="color:#9CA3AF;">Curriculum guide</span></li>
+          <li><span class="check" style="color:#D1D5DB;">—</span> <span style="color:#9CA3AF;">Progress tracking</span></li>
+        </ul>
+        <a href="#" class="pricing-btn pricing-btn-outline">Try Free Now</a>
+      </div>
+
+      <!-- School -->
+      <div class="pricing-card featured">
+        <div class="pricing-badge">Most Popular</div>
+        <div class="pricing-tier">School License</div>
+        <div class="pricing-name">School</div>
+        <div class="pricing-price">$999 <span>/ year</span></div>
+        <div class="pricing-desc">Unlimited classrooms and students at one school location. Includes everything teachers need to use this in class.</div>
+        <ul class="pricing-features">
+          <li><span class="check">✓</span> All 188 STEM Hero cards</li>
+          <li><span class="check">✓</span> Unlimited students & classrooms</li>
+          <li><span class="check">✓</span> State-specific curriculum guide</li>
+          <li><span class="check">✓</span> Teacher lesson plan templates</li>
+          <li><span class="check">✓</span> Purchase order / invoicing</li>
+          <li><span class="check">✓</span> Email support</li>
+        </ul>
+        <a href="#contact" class="pricing-btn pricing-btn-gold">Get a Quote →</a>
+      </div>
+
+      <!-- District -->
+      <div class="pricing-card">
+        <div class="pricing-tier">District License</div>
+        <div class="pricing-name">District</div>
+        <div class="pricing-price">Custom</div>
+        <div class="pricing-desc">Scaled pricing for entire districts based on enrollment. Includes district-wide rollout support and administrator access.</div>
+        <ul class="pricing-features">
+          <li><span class="check">✓</span> All School License features</li>
+          <li><span class="check">✓</span> All schools in district</li>
+          <li><span class="check">✓</span> District admin dashboard</li>
+          <li><span class="check">✓</span> Professional development session</li>
+          <li><span class="check">✓</span> Custom curriculum alignment</li>
+          <li><span class="check">✓</span> Priority support</li>
+        </ul>
+        <a href="#contact" class="pricing-btn pricing-btn-outline">Contact for Pricing</a>
+      </div>
+
+    </div>
+
+    <p class="pricing-note">
+      All school/district licenses are invoiced and accept purchase orders. &nbsp;
+      Questions? Email <a href="mailto:spookintellectLLC@gmail.com">spookintellectLLC@gmail.com</a>
+    </p>
+  </div>
+</section>
+
+<!-- HOW IT WORKS -->
+<section class="how">
+  <div class="section-inner">
+    <span class="section-tag">Getting Started</span>
+    <h2 class="section-title">Up and running in days,<br>not months.</h2>
+    <p class="section-sub">No IT department required. No app to install. Works on every device your school already has.</p>
+
+    <div class="steps">
+      <div class="step">
+        <div class="step-num">1</div>
+        <div class="step-title">Request a Quote</div>
+        <div class="step-desc">Fill out the form below. We'll respond within 24 hours with a formal quote and purchase order information.</div>
+      </div>
+      <div class="step">
+        <div class="step-num">2</div>
+        <div class="step-title">Sign the License</div>
+        <div class="step-desc">Simple one-page licensing agreement. Your district's legal team will have no trouble — we keep it straightforward.</div>
+      </div>
+      <div class="step">
+        <div class="step-num">3</div>
+        <div class="step-title">Get Your Materials</div>
+        <div class="step-desc">Receive your curriculum alignment guide, lesson plan templates, and school access link within 48 hours of payment.</div>
+      </div>
+      <div class="step">
+        <div class="step-num">4</div>
+        <div class="step-title">Students Start Learning</div>
+        <div class="step-desc">Share the link. No logins, no downloads, no IT tickets. Students open it on any device and start exploring immediately.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT / CTA -->
+<section class="contact-section" id="contact">
+  <div class="contact-inner">
+    <span class="section-tag" style="color:var(--gold-lt);">Get in Touch</span>
+    <h2 class="section-title">Ready to bring STEM Heroes<br>to your school?</h2>
+    <p class="section-sub">Fill out the form and we'll get back to you within 24 hours with a quote, curriculum alignment sample, and purchase order instructions.</p>
+
+    <div class="contact-form">
+      <div class="form-row">
+        <div class="form-group">
+          <label>Your Name</label>
+          <input type="text" placeholder="Dr. Jane Smith">
+        </div>
+        <div class="form-group">
+          <label>Your Title</label>
+          <input type="text" placeholder="Curriculum Director">
+        </div>
+      </div>
+      <div class="form-group">
+        <label>School / District Name</label>
+        <input type="text" placeholder="Chicago Public Schools">
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label>Email</label>
+          <input type="email" placeholder="jsmith@district.edu">
+        </div>
+        <div class="form-group">
+          <label>License Type</label>
+          <select>
+            <option value="">Select one…</option>
+            <option>School License – $999/yr</option>
+            <option>District License – Custom</option>
+            <option>Just have questions</option>
+          </select>
+        </div>
+      </div>
+      <div class="form-group">
+        <label>Tell us about your school / district</label>
+        <textarea placeholder="e.g. We're a Title I school in Atlanta with 600 students, grades 3–8. We're looking for Black history curriculum materials that align to Georgia standards…"></textarea>
+      </div>
+      <button class="form-submit"
+        onclick="this.textContent='✅ Sent! We\'ll be in touch within 24 hours.'; this.disabled=true; this.style.background='#27AE60';">
+        Send Inquiry →
+      </button>
+    </div>
+
+    <div class="direct-email">
+      Prefer email? Reach us directly at&nbsp;
+      <a href="mailto:spookintellectLLC@gmail.com">spookintellectLLC@gmail.com</a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-stripe"></div>
+  <strong>STEM Heroes</strong> &nbsp;|&nbsp; A product of <strong>Spook Intellect LLC</strong><br>
+  Contact: <a href="mailto:spookintellectLLC@gmail.com" style="color:var(--gold);text-decoration:none;">spookintellectLLC@gmail.com</a><br><br>
+  <span style="font-size:0.75rem;opacity:0.6;">
+    Photos courtesy of Wikimedia Commons under Public Domain &amp; Creative Commons licenses. &nbsp;|&nbsp;
+    © 2025 Spook Intellect LLC. All rights reserved.
+  </span>
+</footer>
+
+</body>
+</html>
