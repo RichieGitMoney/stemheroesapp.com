@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>STEM Heroes: 100 African American Pioneers</title>
+<title>STEAM Heroes: 200+ African American Pioneers</title>
 <style>
   @import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&display=swap');
 
@@ -181,6 +181,7 @@
   .filter-btn[data-cat="Math"]    { background: rgba(142,68,173,0.25); color: #a29bfe; border-color: #8E44AD; }
   .filter-btn[data-cat="Medicine"]{ background: rgba(192,57,43,0.25); color: #ff7675; border-color: #C0392B; }
   .filter-btn[data-cat="Space"]   { background: rgba(22,160,133,0.25); color: #55efc4; border-color: #16A085; }
+  .filter-btn[data-cat="Arts"]    { background: rgba(231,76,60,0.25); color: #fd79a8; border-color: #E74C3C; }
 
   .filter-btn.active[data-cat="All"]     { background: rgba(255,255,255,0.9); color: #1a0a2e; }
   .filter-btn.active[data-cat="Science"] { background: #27AE60; color: #fff; }
@@ -189,6 +190,7 @@
   .filter-btn.active[data-cat="Math"]    { background: #8E44AD; color: #fff; }
   .filter-btn.active[data-cat="Medicine"]{ background: #C0392B; color: #fff; }
   .filter-btn.active[data-cat="Space"]   { background: #16A085; color: #fff; }
+  .filter-btn.active[data-cat="Arts"]    { background: #E74C3C; color: #fff; }
 
   /* ── SEARCH ── */
   .search-wrap {
@@ -324,6 +326,7 @@
   .cat-Math       { background: rgba(142,68,173,0.2); color: #8E44AD; }
   .cat-Medicine   { background: rgba(192,57,43,0.2); color: #C0392B; }
   .cat-Space      { background: rgba(22,160,133,0.2); color: #16A085; }
+  .cat-Arts       { background: rgba(231,76,60,0.2);  color: #E74C3C; }
 
   .card-name {
     font-size: clamp(1.2rem, 4vw, 1.7rem);
@@ -666,8 +669,8 @@
 <body>
 
 <header>
-  <div class="header-badge">✊🏾 Black Excellence in STEM</div>
-  <h1>100 STEM Heroes</h1>
+  <div class="header-badge">✊🏾 Black Excellence in STEAM</div>
+  <h1>200+ STEAM Heroes</h1>
   <p>African American Pioneers Who Changed the World</p>
   <div class="stats-bar">
     <div class="stat">🔬 Science</div>
@@ -676,6 +679,7 @@
     <div class="stat">➕ Math</div>
     <div class="stat">🏥 Medicine</div>
     <div class="stat">🚀 Space</div>
+    <div class="stat">🎨 Arts</div>
   </div>
 </header>
 
@@ -695,6 +699,7 @@
       <button class="filter-btn"        data-cat="Math"        onclick="filterCards('Math')">➕ Math</button>
       <button class="filter-btn"        data-cat="Medicine"    onclick="filterCards('Medicine')">🏥 Medicine</button>
       <button class="filter-btn"        data-cat="Space"       onclick="filterCards('Space')">🚀 Space</button>
+      <button class="filter-btn"        data-cat="Arts"        onclick="filterCards('Arts')">🎨 Arts</button>
     </div>
 
     <div class="search-wrap">
@@ -772,7 +777,7 @@
   </div>
 </main>
 
-<footer>Made with ❤️ to celebrate Black Excellence &nbsp;|&nbsp; <span id="footer-count">189</span> African American STEM Pioneers<br>
+<footer>Made with ❤️ to celebrate Black Excellence &nbsp;|&nbsp; <span id="footer-count">209</span> African American STEAM Pioneers<br>
   <span style="font-size:0.7rem;opacity:0.5;">Photos courtesy of <a href="https://commons.wikimedia.org" target="_blank" style="color:inherit;">Wikimedia Commons</a> under Public Domain &amp; Creative Commons licenses</span></footer>
 
 <script>
@@ -1566,7 +1571,108 @@ const STEM_HEROES = [
 
   { id:189, name:"Patricia Cowings",             years:"1948–",     cat:"Science",     emoji:"🧘", title:"Psychophysiologist",
     achievement:"NASA scientist who developed Autogenic-Feedback Training Exercise — a biofeedback technique to help astronauts control their own body responses and prevent space sickness without medication.",
-    funfact:"First American woman to be trained as a scientist-astronaut, she spent her career at NASA Ames Research Center finding ways to help astronauts master their own bodies in the disorienting environment of space." }
+    funfact:"First American woman to be trained as a scientist-astronaut, she spent her career at NASA Ames Research Center finding ways to help astronauts master their own bodies in the disorienting environment of space." },
+
+  // ── ARTS ──────────────────────────────────────────────────────────────────
+  { id:190, name:"Gordon Parks",                years:"1912–2006", cat:"Arts",        emoji:"📷", title:"Photographer, Filmmaker & Composer",
+    photo:"https://upload.wikimedia.org/wikipedia/commons/thumb/a/a2/Gordon_Parks.jpg/300px-Gordon_Parks.jpg",
+    achievement:"One of the most influential photographers of the 20th century, Parks became the first Black director of a major Hollywood film (The Learning Tree, 1969) and created the iconic Shaft (1971). He was also a novelist, poet, and composer — entirely self-taught.",
+    funfact:"Parks grew up in extreme poverty in Kansas and was homeless at 16. He bought his first camera at a pawnshop and taught himself photography. He went on to shoot for Life Magazine for 20 years, documenting civil rights, poverty, and Black American life." },
+
+  { id:191, name:"Augusta Savage",              years:"1892–1962", cat:"Arts",        emoji:"🗿", title:"Sculptor & Arts Educator",
+    photo:"https://upload.wikimedia.org/wikipedia/commons/thumb/c/cd/Augusta_Savage_with_Lift_Every_Voice_and_Sing.jpg/300px-Augusta_Savage_with_Lift_Every_Voice_and_Sing.jpg",
+    achievement:"Leading sculptor of the Harlem Renaissance who was denied a scholarship to study in France because of her race — which sparked a national outcry. She created 'Lift Every Voice and Sing,' a 16-foot sculpture for the 1939 World's Fair, and opened the first free art school in Harlem.",
+    funfact:"Despite her landmark 1939 World's Fair sculpture being seen by millions, it was destroyed after the fair because she couldn't afford to transport it. She spent her later years teaching the next generation of Black artists, including Jacob Lawrence." },
+
+  { id:192, name:"Romare Bearden",              years:"1911–1988", cat:"Arts",        emoji:"✂️", title:"Collagist & Visual Artist",
+    photo:"https://upload.wikimedia.org/wikipedia/commons/thumb/1/15/Romare_Bearden_1976.jpg/300px-Romare_Bearden_1976.jpg",
+    achievement:"Revolutionized American art through collage, combining torn photographs, magazine clippings, and painted forms to create vivid depictions of Black American life, jazz, and Southern folk traditions. His work hangs in MoMA and the Metropolitan Museum of Art.",
+    funfact:"Bearden studied mathematics at NYU before switching to art. He also wrote comic strips, managed musicians (including Billy Eckstine), and held a day job as a social worker for 20 years while building one of the most celebrated artistic careers in American history." },
+
+  { id:193, name:"Jacob Lawrence",              years:"1917–2000", cat:"Arts",        emoji:"🎨", title:"Narrative Painter",
+    photo:"https://upload.wikimedia.org/wikipedia/commons/thumb/5/53/Jacob_Lawrence_1983.jpg/300px-Jacob_Lawrence_1983.jpg",
+    achievement:"Created 'The Migration Series' — 60 paintings telling the story of the Great Migration of African Americans from the South to the North. It was the first work by a Black artist acquired by the Museum of Modern Art (MoMA), and was featured in Fortune Magazine in 1941.",
+    funfact:"Lawrence was mentored by Augusta Savage in Harlem and developed his bold, flat-color style using limited palettes — often painting all 60 panels at once, applying one color across all canvases before moving to the next, to ensure consistency." },
+
+  { id:194, name:"Alma Thomas",                 years:"1891–1978", cat:"Arts",        emoji:"🌈", title:"Abstract Painter",
+    photo:"https://upload.wikimedia.org/wikipedia/commons/thumb/6/67/Alma_Thomas_1976.jpg/300px-Alma_Thomas_1976.jpg",
+    achievement:"First African American woman to receive a solo exhibition at the Whitney Museum of American Art (1972). She developed her signature mosaic-like style of colorful brushstrokes inspired by nature. In 2009 and 2015, her paintings were displayed in the White House.",
+    funfact:"Thomas didn't begin her celebrated abstract painting career until she retired from teaching at age 69. She created some of her most famous works while in her 80s and arthritic — propping up canvases and painting from a chair. Proof that it's never too late to create." },
+
+  { id:195, name:"Elizabeth Catlett",           years:"1915–2012", cat:"Arts",        emoji:"🖨️", title:"Sculptor & Printmaker",
+    photo:"https://upload.wikimedia.org/wikipedia/commons/thumb/9/94/Elizabeth_Catlett.jpg/300px-Elizabeth_Catlett.jpg",
+    achievement:"One of the foremost sculptors and printmakers of the 20th century, whose powerful depictions of Black women and workers became iconic. Her linocut 'Sharecropper' and bronze sculptures are in permanent collections of the Smithsonian and major museums worldwide.",
+    funfact:"Catlett was denied entry to the University of Pittsburgh because of her race, then earned her MFA from the University of Iowa under Grant Wood (of 'American Gothic' fame). She later moved to Mexico and became a Mexican citizen, finding more artistic freedom there than in the U.S." },
+
+  { id:196, name:"Florence Price",              years:"1887–1953", cat:"Arts",        emoji:"🎼", title:"Composer & Pianist",
+    photo:"https://upload.wikimedia.org/wikipedia/commons/thumb/4/4f/Florence_Price.jpg/300px-Florence_Price.jpg",
+    achievement:"First African American woman to have a symphony performed by a major U.S. orchestra — the Chicago Symphony performed her Symphony in E Minor in 1933. She composed over 300 works blending Western classical tradition with Black American folk and spiritual music.",
+    funfact:"Price's manuscripts were lost for nearly 50 years until 2009, when a trove of her scores was discovered in an abandoned house in Illinois. The discovery ignited a global revival of her music, and her symphonies are now performed by major orchestras around the world." },
+
+  { id:197, name:"Duke Ellington",              years:"1899–1974", cat:"Arts",        emoji:"🎹", title:"Composer, Pianist & Bandleader",
+    photo:"https://upload.wikimedia.org/wikipedia/commons/thumb/3/3e/Duke_Ellington_-_publicity.jpg/300px-Duke_Ellington_-_publicity.jpg",
+    achievement:"One of the most influential composers in American history, Ellington wrote over 1,000 compositions — including 'Mood Indigo,' 'It Don't Mean a Thing,' and 'Take the A Train.' He led his orchestra for nearly 50 years and helped elevate jazz to an art form recognized worldwide.",
+    funfact:"Ellington was offered the Pulitzer Prize in Music in 1965 but the board vetoed it. He famously responded: 'Fate is being kind to me. Fate doesn't want me to be too famous too young.' He was 66 at the time." },
+
+  { id:198, name:"Katherine Dunham",            years:"1909–2006", cat:"Arts",        emoji:"💃", title:"Choreographer & Anthropologist",
+    photo:"https://upload.wikimedia.org/wikipedia/commons/thumb/0/0c/Katherine_Dunham_1954.jpg/300px-Katherine_Dunham_1954.jpg",
+    achievement:"'The Mother of African American Dance' who earned a PhD in Anthropology and used fieldwork in the Caribbean to create an entirely new dance technique fusing African, Caribbean, and modern dance. Her Dunham Technique is still taught worldwide and influenced virtually every Black dancer who followed.",
+    funfact:"Dunham led a 47-day hunger strike at age 82 to protest U.S. treatment of Haitian refugees. She was awarded the Albert Schweitzer Music Award and the Presidential Medal of Arts. At 90, she was still teaching dance in East St. Louis." },
+
+  { id:199, name:"Alvin Ailey",                 years:"1931–1989", cat:"Arts",        emoji:"🕺", title:"Choreographer & Dance Pioneer",
+    photo:"https://upload.wikimedia.org/wikipedia/commons/thumb/e/ed/Alvin_Ailey.jpg/300px-Alvin_Ailey.jpg",
+    achievement:"Founded the Alvin Ailey American Dance Theater in 1958, which has performed for over 25 million people in 71 countries. His masterpiece 'Revelations' (1960), set to Black American spirituals, is one of the most-watched dance works in history.",
+    funfact:"Ailey grew up during the Great Depression in rural Texas and was largely self-taught. 'Revelations' was choreographed in one intense burst after a dream. He described it as 'blood memories' — deeply personal recollections of the Black church and Southern life of his childhood." },
+
+  { id:200, name:"Quincy Jones",                years:"1933–2024", cat:"Arts",        emoji:"🎙️", title:"Music Producer & Composer",
+    photo:"https://upload.wikimedia.org/wikipedia/commons/thumb/9/99/Quincy_Jones_2013.jpg/300px-Quincy_Jones_2013.jpg",
+    achievement:"One of the most decorated music figures in history with 28 Grammy Awards. Produced Michael Jackson's Thriller — the best-selling album of all time — and Off the Wall and Bad. Also composed scores for over 30 films and television scores including Roots.",
+    funfact:"Jones survived two brain aneurysms in 1974 and was told he might never work again. He went on to produce Thriller just nine years later. He also co-wrote 'We Are the World' and organized the recording in a single overnight session — asking artists to 'check your ego at the door.'" },
+
+  { id:201, name:"Paul Revere Williams",        years:"1894–1980", cat:"Arts",        emoji:"🏛️", title:"Architect",
+    photo:"https://upload.wikimedia.org/wikipedia/commons/thumb/8/8a/Paul_R._Williams_at_drafting_table.jpg/300px-Paul_R._Williams_at_drafting_table.jpg",
+    achievement:"First African American member of the American Institute of Architects (1923) and the first to become an AIA Fellow. Designed over 2,000 buildings in Los Angeles including the Theme Building at LAX, numerous celebrity homes, and the Beverly Hills Hotel expansion.",
+    funfact:"Because many white clients refused to sit next to a Black man during design consultations, Williams taught himself to draw upside-down — so clients could read the plans from across the table. He flipped this disadvantage into a celebrated skill that became his signature." },
+
+  { id:202, name:"Norma Merrick Sklarek",       years:"1926–2012", cat:"Arts",        emoji:"🏗️", title:"Architect — 'The Rosa Parks of Architecture'",
+    photo:"https://upload.wikimedia.org/wikipedia/commons/thumb/d/d7/Norma_Merrick_Sklarek.jpg/300px-Norma_Merrick_Sklarek.jpg",
+    achievement:"First African American woman licensed as an architect in New York (1954) and California (1962), and the first Black woman elected fellow of the American Institute of Architects. She was director of architecture on Terminal One at LAX — one of the largest airport terminals in the world.",
+    funfact:"Sklarek took and failed the architecture licensing exam twice before passing on her third attempt — in an era when Black women were explicitly discouraged from the profession. She went on to co-found the first Black-owned architecture firm in the U.S. to have a woman partner." },
+
+  { id:203, name:"Aaron Douglas",               years:"1899–1979", cat:"Arts",        emoji:"🖌️", title:"Painter & Muralist — 'Father of Black American Art'",
+    photo:"https://upload.wikimedia.org/wikipedia/commons/thumb/4/41/Aaron_Douglas.jpg/300px-Aaron_Douglas.jpg",
+    achievement:"The defining visual artist of the Harlem Renaissance, whose bold geometric style blended African art, Egyptian imagery, and Art Deco to tell the story of Black American history. His murals are permanently displayed at Fisk University and the Schomburg Center for Research in Black Culture.",
+    funfact:"Douglas arrived in Harlem in 1925 just as the Renaissance was beginning. He was immediately embraced by W.E.B. Du Bois, who recruited him to illustrate The Crisis magazine. His visual style became the defining aesthetic of the Harlem Renaissance." },
+
+  { id:204, name:"Wynton Marsalis",             years:"1961–",     cat:"Arts",        emoji:"🎺", title:"Jazz Musician & Composer",
+    photo:"https://upload.wikimedia.org/wikipedia/commons/thumb/d/d5/Wynton_Marsalis_%282011%29.jpg/300px-Wynton_Marsalis_%282011%29.jpg",
+    achievement:"Only musician to win Grammy Awards in both jazz and classical music in the same year (1983 and 1984). Artistic director of Jazz at Lincoln Center, he has composed works performed by major orchestras worldwide and is widely credited with reviving mainstream interest in jazz.",
+    funfact:"Marsalis was born into a family of musicians in New Orleans and was given a trumpet by Al Hirt at age 6. He studied at Juilliard but famously returned to jazz — he felt the art form was being abandoned. His advocacy helped establish jazz as an official American art form recognized by Congress." },
+
+  { id:205, name:"Ava DuVernay",               years:"1972–",     cat:"Arts",        emoji:"🎬", title:"Filmmaker & Director",
+    photo:"https://upload.wikimedia.org/wikipedia/commons/thumb/7/73/Ava_DuVernay_%282015%29.jpg/300px-Ava_DuVernay_%282015%29.jpg",
+    achievement:"First Black woman to win Best Director at Sundance (2012), first Black female director nominated for a Golden Globe, and first to direct a $100 million film (A Wrinkle in Time, 2018). Her documentary 13th and the series When They See Us are among the most-watched Netflix originals ever.",
+    funfact:"DuVernay didn't make her first film until age 32 and had no formal film training. She started as a publicist. When she couldn't get her films distributed, she founded ARRAY, a distribution company for films by people of color and women — which has since released dozens of films." },
+
+  { id:206, name:"John Singleton",              years:"1968–2019", cat:"Arts",        emoji:"🎥", title:"Filmmaker",
+    photo:"https://upload.wikimedia.org/wikipedia/commons/thumb/3/31/John_Singleton.jpg/300px-John_Singleton.jpg",
+    achievement:"At 24, became the first Black director and youngest person ever nominated for the Academy Award for Best Director for Boyz n the Hood (1991). The film, which he wrote and directed, is one of the most influential American films of the last 50 years.",
+    funfact:"Singleton wrote the script for Boyz n the Hood as a student at USC's film school. He submitted it as his senior thesis and was immediately signed by a talent agency. Columbia Pictures greenlit the film with him as director — an almost unheard-of deal for a first-time director." },
+
+  { id:207, name:"Kara Walker",                 years:"1969–",     cat:"Arts",        emoji:"✂️", title:"Visual Artist",
+    photo:"https://upload.wikimedia.org/wikipedia/commons/thumb/b/b4/Kara_Walker_2013.jpg/300px-Kara_Walker_2013.jpg",
+    achievement:"Renowned for large-scale black cut-paper silhouettes that address race, gender, and the history of American slavery. At 27, became one of the youngest recipients of the MacArthur 'Genius' Fellowship. Her work is in the permanent collections of MoMA, the Tate Modern, and the Guggenheim.",
+    funfact:"Walker's large-scale 2014 installation 'A Subtlety' — a 35-foot sphinx made of sugar in a Brooklyn sugar refinery — drew over 130,000 visitors in just 10 weeks. It confronted the history of slavery and sugar production in a way that sparked national conversation about how we memorialize dark history." },
+
+  { id:208, name:"Berry Gordy",                 years:"1929–",     cat:"Arts",        emoji:"🎵", title:"Music Producer & Motown Founder",
+    photo:"https://upload.wikimedia.org/wikipedia/commons/thumb/f/f5/Berry_Gordy_2011.jpg/300px-Berry_Gordy_2011.jpg",
+    achievement:"Founded Motown Records in 1959 with an $800 loan and built it into the most successful Black-owned business in American history. Launched the careers of Stevie Wonder, Diana Ross, Marvin Gaye, The Jackson 5, The Temptations, and dozens more — creating the 'Sound of Young America.'",
+    funfact:"Gordy modeled Motown on the Ford assembly line — he literally set up his studio like a factory, with different rooms for different parts of the music-making process. He required artists to attend 'Artist Development' classes in etiquette, makeup, and performance to ensure they were ready for any stage." },
+
+  { id:209, name:"Charles Alston",              years:"1907–1977", cat:"Arts",        emoji:"🖼️", title:"Painter, Sculptor & Muralist",
+    photo:"https://upload.wikimedia.org/wikipedia/commons/thumb/1/12/Charles_Alston.jpg/300px-Charles_Alston.jpg",
+    achievement:"First African American supervisor in the Works Progress Administration (WPA) during the New Deal, overseeing the Harlem Art Workshop. His 1940 murals 'Magic and Medicine' at Harlem Hospital were groundbreaking for depicting Black figures in a public healthcare institution. He was the first Black artist to have his portrait bust of Martin Luther King Jr. displayed at FBI headquarters.",
+    funfact:"Alston's Harlem studio at 306 West 141st Street — known simply as '306' — was a legendary gathering place for Harlem Renaissance artists, writers, and musicians including Langston Hughes, Zora Neale Hurston, and Jacob Lawrence, whom Alston personally mentored." }
 ];
 
 // ── STATE ──
@@ -1794,7 +1900,7 @@ function showResults() {
   if (pct === 100) {
     document.getElementById('results-emoji').textContent  = '🏆';
     document.getElementById('results-title').textContent  = 'Perfect Score!';
-    document.getElementById('results-sub').textContent    = `${quizScore}/${quizQuestions.length} correct — You know your STEM heroes!`;
+    document.getElementById('results-sub').textContent    = `${quizScore}/${quizQuestions.length} correct — You know your STEAM heroes!`;
   } else if (pct >= 70) {
     document.getElementById('results-emoji').textContent  = '⭐';
     document.getElementById('results-title').textContent  = 'Great Job!';
